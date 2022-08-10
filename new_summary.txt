@@ -1,0 +1,31 @@
+for # training iterations:
+    
+    for one iteration:
+
+        eval seg network
+        get a thermal image
+        get an RGB image
+
+        generate features for the 2 images
+
+        for layer 0 and layer 1:
+            make gram matrices, make vectors out of gram matrices, and pass through the DomainFilter
+            find DomainFilter loss
+        
+        Domain Filter Loss is propagated backward
+
+        if model_train: # true
+            train seg network
+            get a batch of thermal and RGB images
+            get RGB segmentation loss
+            get thermal segmentation loss
+
+            find f_a and f_b, calculate FSM loss across layers of fogpassfilters
+
+            loss = loss_thermal + loss_RGB + args.lambda_fsm*loss_fsm
+            update seg network losses backward
+
+        step DomainFilter optimizers
+    save predictions every 2000
+
+Q real fog image has to be normalized for some reason, why? a_gram = a_gram *(hb*wb)/(ha*wa)

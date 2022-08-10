@@ -18,20 +18,27 @@ from PIL import Image
 from packaging import version
 from datetime import datetime
 
+# models
 from model.refinenetlw import rf_lw101
 from model.fogpassfilter import FogPassFilter_conv1, FogPassFilter_res1
-from utils.losses import CrossEntropy2d
+
+# datasets
 from dataset.paired_cityscapes import Pairedcityscapes
 from dataset.Foggy_Zurich import foggyzurichDataSet
+
+# utils
 from configs.train_config import get_arguments
 from utils.optimisers import get_optimisers, get_lr_schedulers
+from utils.losses import CrossEntropy2d
+
+# metrics
 from pytorch_metric_learning import losses
 from pytorch_metric_learning.distances import CosineSimilarity
 from pytorch_metric_learning.reducers import MeanReducer
 
 IMG_MEAN = np.array((104.00698793, 116.66876762, 122.67891434), dtype=np.float32)
-RESTORE_FROM = 'without_pretraining'
-RESTORE_FROM_fogpass = 'without_pretraining'
+# RESTORE_FROM = 'without_pretraining'
+# RESTORE_FROM_fogpass = 'without_pretraining'
 
 def loss_calc(pred, label, gpu):
     label = Variable(label.long()).cuda(gpu)
@@ -103,17 +110,19 @@ def main():
     cudnn.enabled = True
     gpu = args.gpu
 
-    if args.restore_from == RESTORE_FROM:
-        start_iter = 0
-        model = rf_lw101(num_classes=args.num_classes)
+    # if args.restore_from == RESTORE_FROM:
+    #     start_iter = 0
+    #     model = rf_lw101(num_classes=args.num_classes)
  
-    else:
-        restore = torch.load(args.restore_from)
-        model = rf_lw101(num_classes=args.num_classes)
+    # else:
+    #     restore = torch.load(args.restore_from)
+    #     model = rf_lw101(num_classes=args.num_classes)
 
-        model.load_state_dict(restore['state_dict'])
-        start_iter = 0
+    #     model.load_state_dict(restore['state_dict'])
+    #     start_iter = 0
 
+    start_iter = 0
+    model = rf_lw101(num_classes=args.num_classes)
 
     model.train()
     model.cuda(args.gpu)
@@ -127,14 +136,15 @@ def main():
     FogPassFilter1 = FogPassFilter_conv1(2080)
     FogPassFilter1_optimizer = torch.optim.Adamax([p for p in FogPassFilter1.parameters() if p.requires_grad == True], lr=lr_fpf1)
     FogPassFilter1.cuda(args.gpu)
+
     FogPassFilter2 = FogPassFilter_res1(32896)
     FogPassFilter2_optimizer = torch.optim.Adamax([p for p in FogPassFilter2.parameters() if p.requires_grad == True], lr=lr_fpf2)
     FogPassFilter2.cuda(args.gpu)
 
-    if args.restore_from_fogpass != RESTORE_FROM_fogpass:
-        restore = torch.load(args.restore_from_fogpass)
-        FogPassFilter1.load_state_dict(restore['fogpass1_state_dict'])
-        FogPassFilter2.load_state_dict(restore['fogpass2_state_dict'])
+    # if args.restore_from_fogpass != RESTORE_FROM_fogpass:
+    #     restore = torch.load(args.restore_from_fogpass)
+    #     FogPassFilter1.load_state_dict(restore['fogpass1_state_dict'])
+    #     FogPassFilter2.load_state_dict(restore['fogpass2_state_dict'])
 
     fogpassfilter_loss = losses.ContrastiveLoss(
         pos_margin=0.1,
@@ -180,7 +190,7 @@ def main():
     m = nn.Softmax(dim=1)
     log_m = nn.LogSoftmax(dim=1)    
 
-    for i_iter in tqdm(range(start_iter, args.num_steps)): 
+    for i_iter in tqdm(range(start_iter, args.num_steps)):
         loss_seg_cw_value = 0
         loss_seg_sf_value = 0
         loss_fsm_value = 0
@@ -200,13 +210,17 @@ def main():
                 param.requires_grad = True
             for param in FogPassFilter2.parameters():
                 param.requires_grad = True
-  
+
+            # get a clear weather and synthetic fog pair with label
             _, batch = cwsf_pair_loader_iter_fogpass.__next__()
             sf_image, cw_image, label, size, sf_name, cw_name = batch
             interp = nn.Upsample(size=(size[0][0],size[0][1]), mode='bilinear')
-            
+
+            # get a real fog item
             _, batch_rf = rf_loader_iter_fogpass.__next__()
             rf_img,rf_size, rf_name = batch_rf
+
+            # generate features from 3 images
             img_rf = Variable(rf_img).cuda(args.gpu)
             feature_rf0, feature_rf1, feature_rf2, feature_rf3, feature_rf4, feature_rf5 = model(img_rf) 
 
@@ -223,7 +237,8 @@ def main():
 
             total_fpf_loss = 0
 
-            for idx, layer in enumerate(fsm_weights):
+            for idx, layer in enumerate(fsm_weights): # for layer 0 and layer 1
+                # make gram matrices, make vectors out of gram matrices, and pass through the FogPassFilters
                 cw_feature = cw_features[layer]
                 sf_feature = sf_features[layer]    
                 rf_feature = rf_features[layer]      
@@ -262,6 +277,7 @@ def main():
                     fog_factor_cw[batch_idx] = fogpassfilter(vector_cw_gram[batch_idx])
                     fog_factor_rf[batch_idx] = fogpassfilter(vector_rf_gram[batch_idx])                                                                                                                                                                                                
 
+                # calculate F_L
                 fog_factor_embeddings = torch.cat((torch.unsqueeze(fog_factor_sf[0],0),torch.unsqueeze(fog_factor_cw[0],0),torch.unsqueeze(fog_factor_rf[0],0),
                                                    torch.unsqueeze(fog_factor_sf[1],0),torch.unsqueeze(fog_factor_cw[1],0),torch.unsqueeze(fog_factor_rf[1],0),
                                                    torch.unsqueeze(fog_factor_sf[2],0),torch.unsqueeze(fog_factor_cw[2],0),torch.unsqueeze(fog_factor_rf[2],0),
@@ -278,6 +294,7 @@ def main():
                 wandb.log({f'layer{idx}/fpf loss': fog_pass_filter_loss}, step=i_iter)
                 wandb.log({f'layer{idx}/total fpf loss': total_fpf_loss}, step=i_iter)
 
+            # update total fog pass filter loss for the batch
             total_fpf_loss.backward(retain_graph=False)
 
 
@@ -293,25 +310,40 @@ def main():
                 for param in FogPassFilter2.parameters():
                     param.requires_grad = False
 
+                # get a batch of clear weather and synthetic fog with label
+
                 _, batch = cwsf_pair_loader_iter.__next__()
                 sf_image, cw_image, label, size, sf_name, cw_name = batch
 
                 interp = nn.Upsample(size=(size[0][0],size[0][1]), mode='bilinear')
 
+                # iter % 3 == 0: get CW seg loss, get SF seg loss, get consistency loss
+                # iter % 3 == 1: get SF seg loss, real fog features
+                # iter % 3 == 2: get CW seg loss, real fog features
+
                 if i_iter % 3 == 0:
+                    # get features from synthethic fog
                     images_sf = Variable(sf_image).cuda(args.gpu)
                     feature_sf0,feature_sf1,feature_sf2, feature_sf3,feature_sf4,feature_sf5 = model(images_sf)
+
+                    # get prediction
                     pred_sf5 = interp(feature_sf5)
+                    # synthetic fog segmentation loss
                     loss_seg_sf = loss_calc(pred_sf5, label, args.gpu)
+                    # get features from clear weather image
                     images_cw = Variable(cw_image).cuda(args.gpu)
                     feature_cw0, feature_cw1, feature_cw2, feature_cw3, feature_cw4, feature_cw5 = model(images_cw)
                     pred_cw5 = interp(feature_cw5)
-                    feature_cw5_logsoftmax = log_m(feature_cw5)
-                    feature_sf5_softmax = m(feature_sf5)
+                    #feature_cw5_logsoftmax = log_m(feature_cw5)
+                    #feature_sf5_softmax = m(feature_sf5)
                     feature_sf5_logsoftmax = log_m(feature_sf5)
                     feature_cw5_softmax = m(feature_cw5)
+
+                    # consistency loss
                     loss_con = kl_loss(feature_sf5_logsoftmax, feature_cw5_softmax)
-                    loss_seg_cw = loss_calc(pred_cw5, label, args.gpu)     
+                    # clear weather segmentation loss
+                    loss_seg_cw = loss_calc(pred_cw5, label, args.gpu)
+
                     fsm_weights = {'layer0':0.5, 'layer1':0.5}
                     sf_features = {'layer0':feature_sf0, 'layer1':feature_sf1}                
                     cw_features = {'layer0':feature_cw0, 'layer1':feature_cw1}
@@ -418,6 +450,8 @@ def main():
 
             FogPassFilter1_optimizer.step()
             FogPassFilter2_optimizer.step()
+
+        # how often to save predictions and models
 
         if i_iter < 20000:
             save_pred_every = 5000

@@ -1,0 +1,39 @@
+for # training iterations:
+    
+    for one iteration:
+
+        eval seg network
+        get a clear weather and synthetic fog pair with label
+        get a real fog datapoint
+
+        generate features for all 3 images
+
+        for layer 0 and layer 1:
+            make gram matrices, make vectors out of gram matrices, and pass through the FogPassFilter
+            find fog pass filter loss
+        
+        total_fpf_loss.bacward
+
+        if model_train:
+            train seg network
+            get a batch of clear weather and synthetic fog with label
+            
+            Note: instead of taking a random sample of 3 images from a minidataset, they are generating each pair type every 3 iterations
+            iter % 3 == 0: get CW seg loss, get SF seg loss, get consistency loss
+            iter % 3 == 1: get SF seg loss, real fog features
+            iter % 3 == 2: get CW seg loss, real fog features
+
+            find f_a and f_b, calculate FSM loss
+
+            loss = loss_seg_sf + loss_seg_cw + args.lambda_fsm*loss_fsm + args.lambda_con*loss_con
+            update seg network losses backward
+
+        step FPF optimizers
+    save predictions every 2000
+
+
+Question: what does this line do?
+
+if i_iter % 3 == 1 or i_iter % 3 == 2:
+    a_gram = a_gram *(hb*wb)/(ha*wa)
+
