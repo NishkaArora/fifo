@@ -1,0 +1,23 @@
+for # training iterations:
+    
+
+        for (thermal, rgb) in dataloader:
+            eval seg network
+            generate features for the 2 images
+
+            for layer 0 and layer 1:
+                make gram matrices, make vectors out of gram matrices, and pass through the DomainFilter
+                find DomainFilter loss
+        
+            Domain Filter Loss is propagated backward
+            update domain filter network weights
+
+        for (thermal, rgb) in dataloader:
+            get RGB segmentation loss
+            get thermal segmentation loss
+
+            find f_a and f_b, calculate FSM loss across layers of fogpassfilters
+
+            loss = loss_thermal + loss_RGB + args.lambda_fsm*loss_fsm
+            update seg network weights
+

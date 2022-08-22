@@ -137,7 +137,7 @@ def main():
     if not os.path.exists(args.snapshot_dir):
         os.makedirs(args.snapshot_dir)
 
-    # load thermal/rgb datasets
+    # load thermal/rgb datasets separately for the segmenation training and the domain filter training
 
     thermal_loader_seg = data.DataLoader(Pairedcityscapes(args.data_dir, args.data_dir_cwsf, args.data_list, args.data_list_cwsf,
                                         max_iters=args.num_steps * args.iter_size * args.batch_size,
@@ -171,9 +171,9 @@ def main():
 
     for i_iter in tqdm(range(start_iter, args.num_steps)):
 
-        loss_seg_thermal_value = 0
-        loss_seg_rgb_value = 0
-        loss_sm_value = 0
+        loss_seg_thermal_val = 0
+        loss_seg_rgb_val = 0
+        loss_sm_val = 0
 
         for opt in opts:
             opt.zero_grad()
@@ -340,6 +340,7 @@ def main():
                 loss_sm += layer_sm_loss / 4.
 
                 loss = loss_sm + loss_seg_thermal + loss_seg_rgb
+                loss = loss / args.iter_size
                 loss.backward()
 
                 if loss_seg_thermal != 0:
