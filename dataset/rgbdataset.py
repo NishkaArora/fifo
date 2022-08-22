@@ -71,11 +71,12 @@ class RGBDataset(data.Dataset): # init, len, getitem, _apply_transform
         h, w, c = aug_img.shape
         
         # convert to grayscale
-        aug_img =torch.from_numpy(aug_img).float()
-        new_img = aug_img[:,:,0] + aug_img[:,:,2] + aug_img[:,:,1]
-        new_img /= 3
+        aug_img = aug_img.astype(float)
+        new_img = aug_img[:,:,0] + aug_img[:,:,1] + aug_img[:,:,2]
+        new_img = new_img / 3
+        new_img = np.clip(new_img, 0, 255)
 
-        img_tensor = torch.from_numpy(np.asarray(new_img)).float()
+        img_tensor = torch.from_numpy(new_img).float()
         label_tensor = torch.from_numpy(aug_segmentation).type(torch.LongTensor)
         size = img_tensor.shape
 
