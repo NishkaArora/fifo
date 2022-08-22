@@ -14,7 +14,7 @@ import cv2
 import albumentations as A
 
 class RGBDataset(data.Dataset): # init, len, getitem, _apply_transform
-    def __init__(self, data_root, set='val', max_crop_width=512, grayscale_strategy=False):
+    def __init__(self, data_root, set='validation', max_crop_width=512):
         self.set = set
         self.data_root = data_root
         self.load_data() # set could be train or val
@@ -26,14 +26,14 @@ class RGBDataset(data.Dataset): # init, len, getitem, _apply_transform
             A.HorizontalFlip(p=0.5),
             A.Rotate(limit=10, mask_value=-1, value=0, border_mode=cv2.BORDER_CONSTANT, p=1),
             A.ColorJitter(p=0.5),
+            #A.ToGray(p=1),
         ])
 
         self.val_transform = A.Compose([
             A.LongestMaxSize(max_size=512, always_apply=True),
             A.PadIfNeeded(min_height=512, min_width=512, border_mode=cv2.BORDER_CONSTANT, value=0, mask_value=-1),
+            #A.ToGray(p=1),
         ])
-
-        self.grayscale_strategy = grayscale_strategy
 
     def load_data(self):
         self.data = glob.glob(os.path.join(self.data_root, 'images', self.set, '*'))
@@ -71,13 +71,11 @@ class RGBDataset(data.Dataset): # init, len, getitem, _apply_transform
         h, w, c = aug_img.shape
         
         # convert to grayscale
-        # new_c = 1
-        # new_img = None
-        # new_img = cv2.cvtColor(aug_img, cv2.COLOR_RGB2GRAY)
+        aug_img =torch.from_numpy(aug_img).float()
+        new_img = aug_img[:,:,0] + aug_img[:,:,2] + aug_img[:,:,1]
+        new_img /= 3
 
-        # aug_img = new_img
-
-        img_tensor = torch.from_numpy(aug_img).view(c, h, w).float()
+        img_tensor = torch.from_numpy(np.asarray(new_img)).float()
         label_tensor = torch.from_numpy(aug_segmentation).type(torch.LongTensor)
         size = img_tensor.shape
 
@@ -85,13 +83,13 @@ class RGBDataset(data.Dataset): # init, len, getitem, _apply_transform
     
 if __name__ == '__main__':
     data_root = '../../thermal_data/annotated_thermal_datasets/cocostuff_water/'
-    dataset = RGBDataset(data_root, 'validation', grayscale_strategy=True)
+    dataset = RGBDataset(data_root, 'validation')
     img_tensor, label_tensor, size = dataset.__getitem__(200)
 
     print(img_tensor.shape, label_tensor.shape)
 
     img = img_tensor.numpy().squeeze()
-    plt.imshow(img.transpose(1, 2, 0)/255)
+    plt.imshow((img)/255, cmap='gray')
     plt.show()
 
     plt.figure()
