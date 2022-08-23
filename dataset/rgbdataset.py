@@ -17,22 +17,19 @@ class RGBDataset(data.Dataset): # init, len, getitem, _apply_transform
     def __init__(self, data_root, set='validation', max_crop_width=512):
         self.set = set
         self.data_root = data_root
-        self.load_data() # set could be train or val
+        self.load_data() # set could be training or validation
 
         self.random_transform = A.Compose([
-            # A.Normalize(always_apply=True), 
             A.LongestMaxSize(max_size=512, always_apply=True),
             A.RandomResizedCrop(max_crop_width, max_crop_width, scale=(0.5, 2), ratio=[1.0, 1.0]),
             A.HorizontalFlip(p=0.5),
             A.Rotate(limit=10, mask_value=-1, value=0, border_mode=cv2.BORDER_CONSTANT, p=1),
             A.ColorJitter(p=0.5),
-            #A.ToGray(p=1),
         ])
 
         self.val_transform = A.Compose([
             A.LongestMaxSize(max_size=512, always_apply=True),
             A.PadIfNeeded(min_height=512, min_width=512, border_mode=cv2.BORDER_CONSTANT, value=0, mask_value=-1),
-            #A.ToGray(p=1),
         ])
 
     def load_data(self):
@@ -43,6 +40,7 @@ class RGBDataset(data.Dataset): # init, len, getitem, _apply_transform
     
     def load_image(self, index):
         image_path = self.data[index]
+        
         # load image and label
         segm_path = image_path.replace('images', 'annotations').replace('jpg', 'png')
         img = cv2.imread(image_path, 1)
