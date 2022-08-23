@@ -23,8 +23,10 @@ from model.refinenetlw import rf_lw101
 from model.fogpassfilter import FogPassFilter_conv1, FogPassFilter_res1
 
 # datasets
-from dataset.paired_cityscapes import Pairedcityscapes
-from dataset.Foggy_Zurich import foggyzurichDataSet
+#from dataset.paired_cityscapes import Pairedcityscapes
+#from dataset.Foggy_Zurich import foggyzurichDataSet
+from dataset.rgbdataset import RGBDataset
+from dataset.thermaldataset import ThermalDataset
 
 # utils
 from configs.train_config import get_arguments
@@ -139,26 +141,31 @@ def main():
 
     # load thermal/rgb datasets separately for the segmenation training and the domain filter training
 
-    thermal_loader_seg = data.DataLoader(Pairedcityscapes(args.data_dir, args.data_dir_cwsf, args.data_list, args.data_list_cwsf,
-                                        max_iters=args.num_steps * args.iter_size * args.batch_size,
-                                        mean=IMG_MEAN, set=args.set), batch_size=args.batch_size, shuffle=True, num_workers=args.num_workers,
-                                        pin_memory=True)
+    # thermal_loader_seg = data.DataLoader(Pairedcityscapes(args.data_dir, args.data_dir_cwsf, args.data_list, args.data_list_cwsf,
+    #                                     max_iters=args.num_steps * args.iter_size * args.batch_size,
+    #                                     mean=IMG_MEAN, set=args.set), batch_size=args.batch_size, shuffle=True, num_workers=args.num_workers,
+    #                                     pin_memory=True)
     
-    rgb_loader_seg = data.DataLoader(Pairedcityscapes(args.data_dir, args.data_dir_cwsf, args.data_list, args.data_list_cwsf,
-                                                max_iters=args.num_steps * args.iter_size * args.batch_size,
-                                                mean=IMG_MEAN, set=args.set), batch_size=args.batch_size, shuffle=True, num_workers=args.num_workers,
-                                                pin_memory=True)
+    # rgb_loader_seg = data.DataLoader(Pairedcityscapes(args.data_dir, args.data_dir_cwsf, args.data_list, args.data_list_cwsf,
+    #                                             max_iters=args.num_steps * args.iter_size * args.batch_size,
+    #                                             mean=IMG_MEAN, set=args.set), batch_size=args.batch_size, shuffle=True, num_workers=args.num_workers,
+    #                                             pin_memory=True)
 
-    thermal_loader_df = data.DataLoader(Pairedcityscapes(args.data_dir, args.data_dir_cwsf, args.data_list, args.data_list_cwsf,
-                                                max_iters=args.num_steps * args.iter_size * args.batch_size,
-                                                mean=IMG_MEAN, set=args.set), batch_size=args.batch_size, shuffle=True, num_workers=args.num_workers,
-                                                pin_memory=True)
+    # thermal_loader_df = data.DataLoader(Pairedcityscapes(args.data_dir, args.data_dir_cwsf, args.data_list, args.data_list_cwsf,
+    #                                             max_iters=args.num_steps * args.iter_size * args.batch_size,
+    #                                             mean=IMG_MEAN, set=args.set), batch_size=args.batch_size, shuffle=True, num_workers=args.num_workers,
+    #                                             pin_memory=True)
     
-    rgb_loader_df = data.DataLoader(Pairedcityscapes(args.data_dir, args.data_dir_cwsf, args.data_list, args.data_list_cwsf,
-                                                max_iters=args.num_steps * args.iter_size * args.batch_size,
-                                                mean=IMG_MEAN, set=args.set), batch_size=args.batch_size, shuffle=True, num_workers=args.num_workers,
-                                                pin_memory=True)
-    
+    # rgb_loader_df = data.DataLoader(Pairedcityscapes(args.data_dir, args.data_dir_cwsf, args.data_list, args.data_list_cwsf,
+    #                                             max_iters=args.num_steps * args.iter_size * args.batch_size,
+    #                                             mean=IMG_MEAN, set=args.set), batch_size=args.batch_size, shuffle=True, num_workers=args.num_workers,
+    #                                             pin_memory=True)
+    data_root = '../../thermal_data/annotated_thermal_datasets/'
+    thermal_loader_seg = data.DataLoader(ThermalDataset(data_root, 'training'), batch_size=args.batch_size, shuffle=True, num_workers=1, pin_memory=True)
+    rgb_loader_seg = data.DataLoader(RGBDataset(data_root, 'training'), batch_size=args.batch_size, shuffle=True, num_workers=1, pin_memory=True)
+    thermal_loader_df = data.DataLoader(ThermalDataset(data_root, 'training'), batch_size=args.batch_size, shuffle=True, num_workers=1, pin_memory=True)
+    rgb_loader_df = data.DataLoader(RGBDataset(data_root, 'training'), batch_size=args.batch_size, shuffle=True, num_workers=1, pin_memory=True)
+
     thermal_loader_seg_iter = enumerate(thermal_loader_seg)
     rgb_loader_seg_iter = enumerate(rgb_loader_seg)
 
@@ -189,9 +196,9 @@ def main():
         
         # get a batch of thermal and rgb images
         _, batch  = thermal_loader_df_iter.__next__
-        thermal_image, _, label_thermal, size, _, _ = batch
+        thermal_image, label_thermal, size = batch
         _, batch  = rgb_loader_df_iter.__next__
-        rgb_image, _, label_rgb, size, _, _ = batch
+        rgb_image, label_rgb, size = batch
         interp = nn.Upsample(size=(size[0][0],size[0][1]), mode='bilinear')
 
         # generate features
@@ -274,9 +281,9 @@ def main():
 
             # get a batch of thermal and rgb images
             _, batch  = thermal_loader_seg_iter.__next__
-            thermal_image, _, label_thermal, size, _, _ = batch
+            thermal_image, label_thermal, size = batch
             _, batch  = rgb_loader_seg_iter.__next__
-            rgb_image, _, label_rgb, size, _, _ = batch
+            rgb_image, label_rgb, size = batch
             interp = nn.Upsample(size=(size[0][0],size[0][1]), mode='bilinear')
 
             # get features
