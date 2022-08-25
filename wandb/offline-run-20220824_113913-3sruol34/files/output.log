@@ -1,0 +1,22 @@
+# samples: 2342
+# samples: 10997
+# samples: 2342
+# samples: 10997
+../../thermal_data/annotated_thermal_datasets/ONR_2022-05-15-06-00-08/thermal/thermal-25935.tiff
+../../thermal_data/annotated_thermal_datasets/ONR_2022-05-15-06-00-08/annotations/thermal-25935.png
+../../thermal_data/annotated_thermal_datasets/bigbear/thermal/ONR_2022-05-08-11-27-13-thermal-00048.tiff
+../../thermal_data/annotated_thermal_datasets/bigbear/annotations/ONR_2022-05-08-11-27-13-thermal-00048.png
+<class 'enumerate'>
+../../thermal_data/annotated_thermal_datasets/flight2-1/thermal/frame-000840.tiff
+../../thermal_data/annotated_thermal_datasets/flight2-1/annotations/frame-000840.png
+../../thermal_data/annotated_thermal_datasets/flight2-1/thermal/frame-002370.tiff
+../../thermal_data/annotated_thermal_datasets/flight2-1/annotations/frame-002370.png
+../../thermal_data/annotated_thermal_datasets/ONR_2022-05-15-06-26-49/thermal/thermal-08215.tiff
+../../thermal_data/annotated_thermal_datasets/ONR_2022-05-15-06-26-49/annotations/thermal-08215.png
+  0%|                                                                                                                      | 0/100000 [00:00<?, ?it/s]
+Traceback (most recent call last):
+  File "/home/river/nishka/fifo/new_main.py", line 410, in <module>
+    main()
+  File "/home/river/nishka/fifo/new_main.py", line 199, in main
+    _, batch  = thermal_loader_df_iter.__next__
+TypeError: cannot unpack non-iterable method-wrapper object

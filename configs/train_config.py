@@ -22,7 +22,7 @@ RANDOM_SEED = 1234
 RESTORE_FROM = 'no_model'
 RESTORE_FROM_fogpass = 'no_model'
 SAVE_PRED_EVERY = 100
-SNAPSHOT_DIR = f'/root/data1/snapshots/FIFO_model'   
+SNAPSHOT_DIR = f'/home/river/nishka/fifo/snapshots'   
 
 SET = 'train'
 

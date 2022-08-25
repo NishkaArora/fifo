@@ -1,0 +1,69 @@
+# samples: 2342
+# samples: 10997
+# samples: 2342
+# samples: 10997
+../../thermal_data/annotated_thermal_datasets/ONR_2022-05-15-06-26-49/thermal/thermal-34855.tiff
+../../thermal_data/annotated_thermal_datasets/ONR_2022-05-15-06-26-49/annotations/thermal-34855.png
+../../thermal_data/annotated_thermal_datasets/ONR_2022-05-15-06-00-08/thermal/thermal-28815.tiff
+../../thermal_data/annotated_thermal_datasets/ONR_2022-05-15-06-00-08/annotations/thermal-28815.png
+../../thermal_data/annotated_thermal_datasets/flight2-1/thermal/frame-002220.tiff
+../../thermal_data/annotated_thermal_datasets/flight2-1/annotations/frame-002220.png
+../../thermal_data/annotated_thermal_datasets/ONR_2022-05-15-06-00-08/thermal/thermal-28215.tiff
+../../thermal_data/annotated_thermal_datasets/ONR_2022-05-15-06-00-08/annotations/thermal-28215.png
+../../thermal_data/annotated_thermal_datasets/ONR_2022-05-15-06-26-49/thermal/thermal-11455.tiff
+../../thermal_data/annotated_thermal_datasets/ONR_2022-05-15-06-26-49/annotations/thermal-11455.png
+../../thermal_data/annotated_thermal_datasets/bigbear/thermal/ONR_2022-05-08-11-37-09-thermal-00830.tiff
+../../thermal_data/annotated_thermal_datasets/bigbear/annotations/ONR_2022-05-08-11-37-09-thermal-00830.png
+../../thermal_data/annotated_thermal_datasets/ONR_2022-05-15-06-26-49/thermal/thermal-35935.tiff
+../../thermal_data/annotated_thermal_datasets/ONR_2022-05-15-06-26-49/annotations/thermal-35935.png
+../../thermal_data/annotated_thermal_datasets/ONR_2022-05-15-06-00-08/thermal/thermal-17055.tiff
+../../thermal_data/annotated_thermal_datasets/ONR_2022-05-15-06-00-08/annotations/thermal-17055.png
+../../thermal_data/annotated_thermal_datasets/ONR_2022-05-15-06-00-08/thermal/thermal-15015.tiff
+../../thermal_data/annotated_thermal_datasets/ONR_2022-05-15-06-00-08/annotations/thermal-15015.png
+../../thermal_data/annotated_thermal_datasets/ONR_2022-05-15-06-26-49/thermal/thermal-31135.tiff
+../../thermal_data/annotated_thermal_datasets/ONR_2022-05-15-06-26-49/annotations/thermal-31135.png
+../../thermal_data/annotated_thermal_datasets/bigbear/thermal/ONR_2022-05-08-11-50-48-thermal-02152.tiff
+../../thermal_data/annotated_thermal_datasets/bigbear/annotations/ONR_2022-05-08-11-50-48-thermal-02152.png
+../../thermal_data/annotated_thermal_datasets/ONR_2022-05-15-06-00-08/thermal/thermal-39975.tiff
+../../thermal_data/annotated_thermal_datasets/ONR_2022-05-15-06-00-08/annotations/thermal-39975.png
+../../thermal_data/annotated_thermal_datasets/bigbear/thermal/ONR_2022-05-08-11-50-48-thermal-04312.tiff
+../../thermal_data/annotated_thermal_datasets/bigbear/annotations/ONR_2022-05-08-11-50-48-thermal-04312.png
+../../thermal_data/annotated_thermal_datasets/ONR_2022-05-15-06-00-08/thermal/thermal-26895.tiff
+../../thermal_data/annotated_thermal_datasets/ONR_2022-05-15-06-00-08/annotations/thermal-26895.png
+../../thermal_data/annotated_thermal_datasets/ONR_2022-05-15-06-00-08/thermal/thermal-21735.tiff
+../../thermal_data/annotated_thermal_datasets/ONR_2022-05-15-06-00-08/annotations/thermal-21735.png
+../../thermal_data/annotated_thermal_datasets/ONR_2022-05-15-06-26-49/thermal/thermal-15295.tiff
+../../thermal_data/annotated_thermal_datasets/ONR_2022-05-15-06-26-49/annotations/thermal-15295.png
+../../thermal_data/annotated_thermal_datasets/bigbear/thermal/ONR_2022-05-08-11-23-59-thermal-04440.tiff
+../../thermal_data/annotated_thermal_datasets/bigbear/annotations/ONR_2022-05-08-11-23-59-thermal-04440.png
+../../thermal_data/annotated_thermal_datasets/ONR_2022-05-15-06-26-49/thermal/thermal-39655.tiff
+../../thermal_data/annotated_thermal_datasets/ONR_2022-05-15-06-26-49/annotations/thermal-39655.png
+../../thermal_data/annotated_thermal_datasets/bigbear/thermal/ONR_2022-05-08-11-23-59-thermal-02280.tiff
+../../thermal_data/annotated_thermal_datasets/bigbear/annotations/ONR_2022-05-08-11-23-59-thermal-02280.png
+../../thermal_data/annotated_thermal_datasets/ONR_2022-05-15-06-00-08/thermal/thermal-12255.tiff
+../../thermal_data/annotated_thermal_datasets/ONR_2022-05-15-06-00-08/annotations/thermal-12255.png
+../../thermal_data/annotated_thermal_datasets/ONR_2022-05-15-06-00-08/thermal/thermal-24255.tiff
+../../thermal_data/annotated_thermal_datasets/ONR_2022-05-15-06-00-08/annotations/thermal-24255.png
+../../thermal_data/annotated_thermal_datasets/ONR_2022-05-15-06-26-49/thermal/thermal-16375.tiff
+../../thermal_data/annotated_thermal_datasets/ONR_2022-05-15-06-26-49/annotations/thermal-16375.png
+../../thermal_data/annotated_thermal_datasets/ONR_2022-05-15-06-00-08/thermal/thermal-30975.tiff
+../../thermal_data/annotated_thermal_datasets/ONR_2022-05-15-06-00-08/annotations/thermal-30975.png
+../../thermal_data/annotated_thermal_datasets/bigbear/thermal/ONR_2022-05-08-11-37-09-thermal-03230.tiff
+../../thermal_data/annotated_thermal_datasets/bigbear/annotations/ONR_2022-05-08-11-37-09-thermal-03230.png
+torch.Size([4, 19, 512, 512])
+4
+torch.Size([4, 3, 512, 512])
+4
+  0%|                                                                                                                      | 0/100000 [00:14<?, ?it/s]
+Traceback (most recent call last):
+  File "/home/river/nishka/fifo/new_main.py", line 415, in <module>
+    main()
+  File "/home/river/nishka/fifo/new_main.py", line 309, in main
+    loss_seg_thermal = seg_loss(pred_t5, label_thermal, args.gpu)
+  File "/home/river/nishka/fifo/new_main.py", line 52, in seg_loss
+    return criterion(pred, label)
+  File "/home/river/miniconda3/envs/pl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1110, in _call_impl
+    return forward_call(*input, **kwargs)
+  File "/home/river/nishka/fifo/utils/losses.py", line 24, in forward
+    assert target.dim() == 3
+AssertionError

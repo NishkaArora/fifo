@@ -29,7 +29,8 @@ class ThermalDataset(data.Dataset): # init, len, getitem, _apply_transform
             A.OneOf([
                 A.GridDistortion(), 
                 A.ElasticTransform(mask_value=-1, value=0), 
-                A.OpticalDistortion(mask_value=-1, value=0)], p=0.5),
+                A.OpticalDistortion(mask_value=-1, value=0)
+                ], p=0.5),
 
             A.Rotate(limit=10, mask_value=-1, value=0, border_mode=cv2.BORDER_CONSTANT, p=1),
             A.MotionBlur(p=0.5), 
@@ -88,7 +89,9 @@ class ThermalDataset(data.Dataset): # init, len, getitem, _apply_transform
     def __getitem__(self, index):
 
         img, segm = self.load_image(index)
-
+        img = img * 255
+        img = img.astype(np.uint8)
+        
         if self.set == 'training':
             augmented_data = self.random_transform(image=img, mask=segm)
         elif self.set == 'validation':
@@ -99,22 +102,52 @@ class ThermalDataset(data.Dataset): # init, len, getitem, _apply_transform
         H, W = augmented_data['image'].shape
 
         aug_img = augmented_data['image']
-        img_tensor = torch.from_numpy(aug_img).float()*255
+        img_tensor = torch.from_numpy(aug_img)
+        #img_tensor = torch.from_numpy(aug_img).float()*255
+
+        img_tensor.unsqueeze_(0)
+        img_tensor = img_tensor.expand(3, 512, 512)
+
+        #label_tensor.unsqueeze_(0)
+        #label_tensor = label_tensor.expand(3, 512, 512)
+
+        img_tensor = img_tensor.float()/255
+
         size = img_tensor.shape
 
         return img_tensor, label_tensor, np.array(size)
     
 if __name__ == '__main__':
+
     data_root = '../../thermal_data/annotated_thermal_datasets/'
-    dataset = ThermalDataset(data_root, 'validation')
+    # thermal_data_loader = data.DataLoader(ThermalDataset(data_root, 'validation'), batch_size=3, shuffle=True, num_workers=1, pin_memory=True)
+    # thermal_iter = enumerate(thermal_data_loader)
+
+    # print(thermal_iter.__next__)
+
+    # step, batch = thermal_iter.__next__()
+
+    #print(step)
+    #print(batch[0].shape)
+    #img_tensor, label_tensor, size = batch[2]
+
+    #NOTE: batch[0] has batch_size number of imges
+        # batch[1] has batch_size number of labels
+        # batch[2] has batch size number of sizes
+
+    dataset = ThermalDataset(data_root, 'training')
     img_tensor, label_tensor, size = dataset.__getitem__(200)
 
     print(img_tensor.shape, label_tensor.shape)
 
-    img = img_tensor.numpy().squeeze()
-    plt.imshow(img/255, cmap='gray')
+    print(img_tensor.dtype)
+
+    img = img_tensor[0].numpy().squeeze()
+    plt.imshow(img, cmap='gray')
     plt.show()
 
     plt.figure()
-    plt.imshow(label_tensor.numpy().squeeze())
+    plt.imshow(label_tensor[0].numpy().squeeze())
     plt.show()
+
+    print(size)

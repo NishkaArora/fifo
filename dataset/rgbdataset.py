@@ -33,14 +33,14 @@ class RGBDataset(data.Dataset): # init, len, getitem, _apply_transform
         ])
 
     def load_data(self):
-        self.data = glob.glob(os.path.join(self.data_root, 'images', self.set, '*'))
+        self.data = glob.glob(os.path.join(self.data_root, 'cocostuff_water', 'images', self.set, '*'))
         self.num_sample = len(self.data)
         assert self.num_sample > 0
         print('# samples: {}'.format(self.num_sample))
     
     def load_image(self, index):
         image_path = self.data[index]
-        
+
         # load image and label
         segm_path = image_path.replace('images', 'annotations').replace('jpg', 'png')
         img = cv2.imread(image_path, 1)
@@ -74,23 +74,29 @@ class RGBDataset(data.Dataset): # init, len, getitem, _apply_transform
         new_img = new_img / 3
         new_img = np.clip(new_img, 0, 255)
 
-        img_tensor = torch.from_numpy(new_img).float()
+        img_tensor = torch.from_numpy(new_img).float() / 255
         label_tensor = torch.from_numpy(aug_segmentation).type(torch.LongTensor)
         size = img_tensor.shape
+
+        img_tensor.unsqueeze_(0)
+        img_tensor = img_tensor.expand(3, 512, 512)
+
+        #label_tensor.unsqueeze_(0)
+        #label_tensor = label_tensor.expand(3, 512, 512)
 
         return img_tensor, label_tensor, np.array(size)
     
 if __name__ == '__main__':
-    data_root = '../../thermal_data/annotated_thermal_datasets/cocostuff_water/'
-    dataset = RGBDataset(data_root, 'validation')
+    data_root = '../../thermal_data/annotated_thermal_datasets/'
+    dataset = RGBDataset(data_root, 'training')
     img_tensor, label_tensor, size = dataset.__getitem__(200)
 
     print(img_tensor.shape, label_tensor.shape)
 
-    img = img_tensor.numpy().squeeze()
-    plt.imshow((img)/255, cmap='gray')
+    img = img_tensor[0].numpy().squeeze()
+    plt.imshow((img), cmap='gray')
     plt.show()
 
     plt.figure()
-    plt.imshow(label_tensor.numpy().squeeze())
+    plt.imshow(label_tensor[0].numpy().squeeze())
     plt.show()

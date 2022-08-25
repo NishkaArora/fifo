@@ -1,0 +1,17 @@
+2022-08-25 15:26:53,368 INFO    MainThread:20000 [internal.py:wandb_internal():92] W&B internal server running at pid: 20000, started at: 2022-08-25 15:26:53.368683
+2022-08-25 15:26:53,370 DEBUG   HandlerThread:20000 [handler.py:handle_request():141] handle_request: run_start
+2022-08-25 15:26:53,370 INFO    WriterThread:20000 [datastore.py:open_for_write():77] open: /home/river/nishka/fifo/wandb/offline-run-20220825_152652-1xc01i0l/run-1xc01i0l.wandb
+2022-08-25 15:26:53,373 DEBUG   HandlerThread:20000 [meta.py:__init__():37] meta init
+2022-08-25 15:26:53,373 DEBUG   HandlerThread:20000 [meta.py:__init__():51] meta init done
+2022-08-25 15:26:53,373 DEBUG   HandlerThread:20000 [meta.py:probe():211] probe
+2022-08-25 15:26:53,374 DEBUG   HandlerThread:20000 [meta.py:_setup_git():201] setup git
+2022-08-25 15:26:53,384 DEBUG   HandlerThread:20000 [meta.py:_setup_git():208] setup git done
+2022-08-25 15:26:53,384 DEBUG   HandlerThread:20000 [meta.py:_save_pip():55] save pip
+2022-08-25 15:26:53,384 DEBUG   HandlerThread:20000 [meta.py:_save_pip():69] save pip done
+2022-08-25 15:26:53,385 DEBUG   HandlerThread:20000 [meta.py:_save_conda():76] save conda
+2022-08-25 15:26:55,650 DEBUG   HandlerThread:20000 [meta.py:_save_conda():86] save conda done
+2022-08-25 15:26:55,650 DEBUG   HandlerThread:20000 [meta.py:probe():249] probe done
+2022-08-25 15:27:03,907 DEBUG   HandlerThread:20000 [handler.py:handle_request():141] handle_request: partial_history
+2022-08-25 15:27:03,908 DEBUG   HandlerThread:20000 [handler.py:handle_request():141] handle_request: partial_history
+2022-08-25 15:27:04,173 DEBUG   HandlerThread:20000 [handler.py:handle_request():141] handle_request: partial_history
+2022-08-25 15:27:04,174 DEBUG   HandlerThread:20000 [handler.py:handle_request():141] handle_request: partial_history

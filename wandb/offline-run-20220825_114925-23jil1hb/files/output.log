@@ -1,0 +1,81 @@
+# samples: 2342
+# samples: 10997
+# samples: 2342
+# samples: 10997
+../../thermal_data/annotated_thermal_datasets/flight2-1/thermal/frame-000660.tiff
+../../thermal_data/annotated_thermal_datasets/flight2-1/annotations/frame-000660.png
+../../thermal_data/annotated_thermal_datasets/ONR_2022-05-15-06-26-49/thermal/thermal-20095.tiff
+../../thermal_data/annotated_thermal_datasets/ONR_2022-05-15-06-26-49/annotations/thermal-20095.png
+../../thermal_data/annotated_thermal_datasets/flight2-1/thermal/frame-001530.tiff
+../../thermal_data/annotated_thermal_datasets/flight2-1/annotations/frame-001530.png
+../../thermal_data/annotated_thermal_datasets/ONR_2022-05-15-06-00-08/thermal/thermal-12615.tiff
+../../thermal_data/annotated_thermal_datasets/ONR_2022-05-15-06-00-08/annotations/thermal-12615.png
+../../thermal_data/annotated_thermal_datasets/ONR_2022-05-15-06-00-08/thermal/thermal-21015.tiff
+../../thermal_data/annotated_thermal_datasets/ONR_2022-05-15-06-00-08/annotations/thermal-21015.png
+../../thermal_data/annotated_thermal_datasets/bigbear/thermal/ONR_2022-05-08-11-37-09-thermal-03830.tiff
+../../thermal_data/annotated_thermal_datasets/bigbear/annotations/ONR_2022-05-08-11-37-09-thermal-03830.png
+../../thermal_data/annotated_thermal_datasets/bigbear/thermal/ONR_2022-05-08-11-30-40-thermal-05481.tiff
+../../thermal_data/annotated_thermal_datasets/bigbear/annotations/ONR_2022-05-08-11-30-40-thermal-05481.png
+../../thermal_data/annotated_thermal_datasets/ONR_2022-05-15-06-26-49/thermal/thermal-18055.tiff
+../../thermal_data/annotated_thermal_datasets/ONR_2022-05-15-06-26-49/annotations/thermal-18055.png
+../../thermal_data/annotated_thermal_datasets/bigbear/thermal/ONR_2022-05-08-11-50-48-thermal-02752.tiff
+../../thermal_data/annotated_thermal_datasets/bigbear/annotations/ONR_2022-05-08-11-50-48-thermal-02752.png
+../../thermal_data/annotated_thermal_datasets/ONR_2022-05-15-06-26-49/thermal/thermal-12895.tiff
+../../thermal_data/annotated_thermal_datasets/ONR_2022-05-15-06-26-49/annotations/thermal-12895.png
+../../thermal_data/annotated_thermal_datasets/ONR_2022-05-15-06-26-49/thermal/thermal-17935.tiff
+../../thermal_data/annotated_thermal_datasets/ONR_2022-05-15-06-26-49/annotations/thermal-17935.png
+../../thermal_data/annotated_thermal_datasets/ONR_2022-05-15-06-26-49/thermal/thermal-12295.tiff
+../../thermal_data/annotated_thermal_datasets/ONR_2022-05-15-06-26-49/annotations/thermal-12295.png
+../../thermal_data/annotated_thermal_datasets/bigbear/thermal/ONR_2022-05-08-11-27-13-thermal-02808.tiff
+../../thermal_data/annotated_thermal_datasets/bigbear/annotations/ONR_2022-05-08-11-27-13-thermal-02808.png
+../../thermal_data/annotated_thermal_datasets/ONR_2022-05-15-06-26-49/thermal/thermal-33415.tiff
+../../thermal_data/annotated_thermal_datasets/ONR_2022-05-15-06-26-49/annotations/thermal-33415.png
+../../thermal_data/annotated_thermal_datasets/ONR_2022-05-15-06-26-49/thermal/thermal-33295.tiff
+../../thermal_data/annotated_thermal_datasets/ONR_2022-05-15-06-26-49/annotations/thermal-33295.png
+../../thermal_data/annotated_thermal_datasets/bigbear/thermal/ONR_2022-05-08-11-37-09-thermal-04910.tiff
+../../thermal_data/annotated_thermal_datasets/bigbear/annotations/ONR_2022-05-08-11-37-09-thermal-04910.png
+../../thermal_data/annotated_thermal_datasets/ONR_2022-05-15-06-00-08/thermal/thermal-33015.tiff
+../../thermal_data/annotated_thermal_datasets/ONR_2022-05-15-06-00-08/annotations/thermal-33015.png
+../../thermal_data/annotated_thermal_datasets/ONR_2022-05-15-06-00-08/thermal/thermal-27135.tiff
+../../thermal_data/annotated_thermal_datasets/ONR_2022-05-15-06-00-08/annotations/thermal-27135.png
+../../thermal_data/annotated_thermal_datasets/bigbear/thermal/ONR_2022-05-08-11-50-48-thermal-00232.tiff
+../../thermal_data/annotated_thermal_datasets/bigbear/annotations/ONR_2022-05-08-11-50-48-thermal-00232.png
+../../thermal_data/annotated_thermal_datasets/ONR_2022-05-15-06-26-49/thermal/thermal-03415.tiff
+../../thermal_data/annotated_thermal_datasets/ONR_2022-05-15-06-26-49/annotations/thermal-03415.png
+tensor([[ 1.1436e+03,  1.0133e+02,  7.9782e+02,  ...,  8.6099e+02,
+         -7.0202e-03, -1.1608e+04],
+        [ 1.0133e+02,  7.8057e+01,  1.3200e+02,  ...,  1.2173e+02,
+         -1.8433e-03, -2.8926e+03],
+        [ 7.9782e+02,  1.3200e+02,  3.7342e+03,  ...,  1.8767e+03,
+         -1.4438e-02, -2.3413e+04],
+        ...,
+        [ 8.6099e+02,  1.2173e+02,  1.8767e+03,  ...,  2.0166e+03,
+         -1.5462e-02, -2.4937e+04],
+        [-7.0202e-03, -1.8433e-03, -1.4438e-02,  ..., -1.5462e-02,
+          1.3271e-07,  2.1242e-01],
+        [-1.1608e+04, -2.8926e+03, -2.3413e+04,  ..., -2.4937e+04,
+          2.1242e-01,  3.4131e+05]])
+torch.float32
+torch.Size([64, 64])
+tensor([[ 1.8734e+03,  7.0500e+01,  7.0650e+02,  ...,  7.8121e+02,
+         -5.6756e-03, -1.0132e+04],
+        [ 7.0500e+01,  1.1501e+02,  7.1083e+00,  ..., -2.9551e+01,
+         -1.4822e-03, -2.2436e+03],
+        [ 7.0650e+02,  7.1083e+00,  5.2009e+03,  ...,  1.9316e+03,
+         -1.2484e-02, -2.0690e+04],
+        ...,
+        [ 7.8121e+02, -2.9551e+01,  1.9316e+03,  ...,  2.0547e+03,
+         -1.3009e-02, -2.1242e+04],
+        [-5.6756e-03, -1.4822e-03, -1.2484e-02,  ..., -1.3009e-02,
+          1.1043e-07,  1.7646e-01],
+        [-1.0132e+04, -2.2436e+03, -2.0690e+04,  ..., -2.1242e+04,
+          1.7646e-01,  2.8577e+05]])
+torch.float32
+torch.Size([64, 64])
+  0%|                                                                                                                      | 0/100000 [00:06<?, ?it/s]
+Traceback (most recent call last):
+  File "/home/river/nishka/fifo/new_main.py", line 417, in <module>
+    main()
+  File "/home/river/nishka/fifo/new_main.py", line 253, in main
+    vector_thermal_gram = Variable(thermal_gram[batch_idx][torch.triu(torch.ones(thermal_gram[batch_idx].size()[0], thermal_gram[batch_idx].size()[1])) == 1], requires_grad=True)
+IndexError: tuple index out of range

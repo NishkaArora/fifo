@@ -1,0 +1,12 @@
+
+# samples: 2342
+Traceback (most recent call last):
+  File "/home/river/nishka/fifo/new_main.py", line 409, in <module>
+    main()
+  File "/home/river/nishka/fifo/new_main.py", line 165, in main
+    rgb_loader_seg = data.DataLoader(RGBDataset(data_root, 'training'), batch_size=args.batch_size, shuffle=True, num_workers=1, pin_memory=True)
+  File "/home/river/nishka/fifo/dataset/rgbdataset.py", line 20, in __init__
+    self.load_data() # set could be training or validation
+  File "/home/river/nishka/fifo/dataset/rgbdataset.py", line 38, in load_data
+    assert self.num_sample > 0
+AssertionError
