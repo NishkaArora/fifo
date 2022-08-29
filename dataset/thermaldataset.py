@@ -51,14 +51,12 @@ class ThermalDataset(data.Dataset): # init, len, getitem, _apply_transform
         self.num_sample = 0
 
         for name in dataset_names:
-            #print(os.path.join(self.data_root, name, 'annotations', '*'))
+            print(os.path.join(self.data_root, name, 'annotations', '*'))
             self.data += glob.glob(os.path.join(self.data_root, name, 'annotations', '*'))
-            self.num_sample += len(self.data)
-        
+       
+        self.data = self.data[0: len(self.data)//10] # 10% of original data
+        self.num_sample = len(self.data)
         assert self.num_sample > 0
-
-        #print(self.data)
-
         print('# samples: {}'.format(self.num_sample))
     
     def load_image(self, index):
@@ -66,8 +64,8 @@ class ThermalDataset(data.Dataset): # init, len, getitem, _apply_transform
         #print(self.data[index])
         # load image and label
         image_path = segm_path.replace('annotations', 'thermal').replace('png', 'tiff')
-        print(image_path)
-        print(segm_path)
+        #print(image_path)
+        #print(segm_path)
         img = cv2.imread(image_path, -1)
         segm = cv2.imread(segm_path, 0).astype(float)
     
@@ -119,9 +117,13 @@ class ThermalDataset(data.Dataset): # init, len, getitem, _apply_transform
     
 if __name__ == '__main__':
 
-    data_root = '../../thermal_data/annotated_thermal_datasets/'
-    # thermal_data_loader = data.DataLoader(ThermalDataset(data_root, 'validation'), batch_size=3, shuffle=True, num_workers=1, pin_memory=True)
-    # thermal_iter = enumerate(thermal_data_loader)
+    data_root = '../../thermal_data/labelled_thermal_data/'
+    thermal_data_loader = data.DataLoader(ThermalDataset(data_root, 'training'), batch_size=3, shuffle=True, num_workers=1, pin_memory=True)
+    thermal_iter = enumerate(thermal_data_loader)
+
+    for step, batch in thermal_iter:
+        print(step)
+
 
     # print(thermal_iter.__next__)
 
@@ -135,19 +137,19 @@ if __name__ == '__main__':
         # batch[1] has batch_size number of labels
         # batch[2] has batch size number of sizes
 
-    dataset = ThermalDataset(data_root, 'training')
-    img_tensor, label_tensor, size = dataset.__getitem__(200)
+    # dataset = ThermalDataset(data_root, 'training')
+    # img_tensor, label_tensor, size = dataset.__getitem__(50)
 
-    print(img_tensor.shape, label_tensor.shape)
+    # print(img_tensor.shape, label_tensor.shape)
 
-    print(img_tensor.dtype)
+    # print(img_tensor.dtype)
 
-    img = img_tensor[0].numpy().squeeze()
-    plt.imshow(img, cmap='gray')
-    plt.show()
+    # img = img_tensor[0].numpy().squeeze()
+    # plt.imshow(img, cmap='gray')
+    # plt.show()
 
-    plt.figure()
-    plt.imshow(label_tensor[0].numpy().squeeze())
-    plt.show()
+    # plt.figure()
+    # plt.imshow(label_tensor.numpy().squeeze())
+    # plt.show()
 
-    print(size)
+    # print(size)

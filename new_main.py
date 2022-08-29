@@ -141,7 +141,7 @@ def main():
 
     # load thermal/rgb datasets separately for the segmenation training and the domain filter training
 
-    data_root = '../../thermal_data/annotated_thermal_datasets/'
+    data_root = '../labelled_thermal_data/'
     thermal_loader_seg = data.DataLoader(ThermalDataset(data_root, 'training'), batch_size=args.batch_size, shuffle=True, num_workers=1, pin_memory=True)
     rgb_loader_seg = data.DataLoader(RGBDataset(data_root, 'training'), batch_size=args.batch_size, shuffle=True, num_workers=1, pin_memory=True)
     thermal_loader_df = data.DataLoader(ThermalDataset(data_root, 'training'), batch_size=args.batch_size, shuffle=True, num_workers=1, pin_memory=True)
@@ -175,100 +175,14 @@ def main():
             for param in DomainFilter2.parameters():
                 param.requires_grad = True
         
-        # get a batch of thermal and rgb images
-        _, batch  = thermal_loader_df_iter.__next__()
-        thermal_image, label_thermal, size = batch
-        _, batch  = rgb_loader_df_iter.__next__()
-        rgb_image, label_rgb, size = batch
-        interp = nn.Upsample(size=(size[0][0],size[0][1]), mode='bilinear')
-
-        # generate features
-        thermal_image = Variable(thermal_image)#.cuda(args.gpu)
-        feature_t0, feature_t1, feature_t2, feature_t3, feature_t4, feature_t5 = model(thermal_image)
-
-        rgb_image = Variable(rgb_image)#.cuda(args.gpu)
-        feature_rgb0, feature_rgb1, feature_rgb2, feature_rgb3, feature_rgb4, feature_rgb5 = model(rgb_image)
-
-        fsm_weights = {'layer0':0.5, 'layer1':0.5}
-        rgb_features = {'layer0': feature_rgb0, 'layer1': feature_rgb1}
-        thermal_features = {'layer0': feature_t0, 'layer1': feature_t1}
-
-        total_df_loss = 0
-
-        for idx, layer in enumerate(fsm_weights):
-            # find domain filter loss for both layers
-
-            thermal_feature = thermal_features[layer]
-            rgb_feature = rgb_features[layer]
-
-            if idx == 0:
-                domain_filter = DomainFilter1
-                domain_filter_optimizer = DomainFilter1_optimizer
-            elif idx == 1:
-                domain_filter = DomainFilter2
-                domain_filter_optimizer = DomainFilter2_optimizer
-
-            domain_filter.train()  
-            domain_filter_optimizer.zero_grad()
-
-            thermal_gram = [0]*args.batch_size
-            rgb_gram = [0]*args.batch_size
-            vector_thermal_gram = [0]*args.batch_size
-            vector_rgb_gram = [0]*args.batch_size
-            thermal_factor = [0]*args.batch_size
-            rgb_factor = [0]*args.batch_size
-
-            for batch_idx in range(args.batch_size):
-                # make gram matrix, upper diagnol as vector, factor vectors
-                thermal_gram[batch_idx] = gram_matrix(thermal_feature[batch_idx])
-                rgb_gram[batch_idx] = gram_matrix(rgb_feature[batch_idx])
-
-                vector_thermal_gram[batch_idx] = Variable(thermal_gram[batch_idx][torch.triu(torch.ones(thermal_gram[batch_idx].size()[0], thermal_gram[batch_idx].size()[1])) == 1], requires_grad=True)
-                vector_rgb_gram[batch_idx] = Variable(rgb_gram[batch_idx][torch.triu(torch.ones(rgb_gram[batch_idx].size()[0], rgb_gram[batch_idx].size()[1])) == 1], requires_grad=True)
-
-                thermal_factor[batch_idx] = domain_filter(vector_thermal_gram[batch_idx])
-                rgb_factor[batch_idx] = domain_filter(vector_rgb_gram[batch_idx])
-            
-            domain_factor_embeddings = torch.cat((torch.unsqueeze(thermal_factor[0],0),torch.unsqueeze(rgb_factor[0],0),
-                                                   torch.unsqueeze(thermal_factor[1],0),torch.unsqueeze(rgb_factor[1],0),
-                                                   torch.unsqueeze(thermal_factor[2],0),torch.unsqueeze(rgb_factor[2],0),
-                                                   torch.unsqueeze(thermal_factor[3],0),torch.unsqueeze(rgb_factor[3],0)),0)
-
-            domain_factor_embeddings_norm = torch.norm(domain_factor_embeddings, p=2, dim=1).detach()
-            size_domain_factor = domain_factor_embeddings.size()
-            domain_factor_embeddings = domain_factor_embeddings.div(domain_factor_embeddings_norm.expand(size_domain_factor[1],8).t())
-            domain_factor_labels = torch.LongTensor([0, 1, 0, 1, 0, 1, 0, 1])
-            domain_filter_loss_val = domainfilter_loss(domain_factor_embeddings,domain_factor_labels)
-
-            total_df_loss +=  domain_filter_loss_val
-
-            wandb.log({f'layer{idx}/fpf loss': domain_filter_loss_val}, step=i_iter)
-            wandb.log({f'layer{idx}/total fpf loss': total_df_loss}, step=i_iter)
-
-        # update total domain filter loss for the batch
-        total_df_loss.backward(retain_graph=False)
-
-        if args.modeltrain=='train':
-            # train segmentation network
-            # freeze the parameters of fog pass filtering modules
-
-            model.train()
-            for param in model.parameters():
-                param.requires_grad = True
-            for param in DomainFilter1.parameters():
-                param.requires_grad = False
-            for param in DomainFilter2.parameters():
-                param.requires_grad = False
-
             # get a batch of thermal and rgb images
-            _, batch  = thermal_loader_seg_iter.__next__()
+            _, batch  = thermal_loader_df_iter.__next__()
             thermal_image, label_thermal, size = batch
-            _, batch  = rgb_loader_seg_iter.__next__()
+            _, batch  = rgb_loader_df_iter.__next__()
             rgb_image, label_rgb, size = batch
             interp = nn.Upsample(size=(size[0][0],size[0][1]), mode='bilinear')
 
-            # get features
-
+            # generate features
             thermal_image = Variable(thermal_image)#.cuda(args.gpu)
             feature_t0, feature_t1, feature_t2, feature_t3, feature_t4, feature_t5 = model(thermal_image)
 
@@ -279,27 +193,13 @@ def main():
             rgb_features = {'layer0': feature_rgb0, 'layer1': feature_rgb1}
             thermal_features = {'layer0': feature_t0, 'layer1': feature_t1}
 
-            # thermal segmentation loss
-            pred_t5 = interp(feature_t5)
-            loss_seg_thermal = seg_loss(pred_t5, label_thermal, args.gpu)
-
-            # rgb segmentation loss
-            pred_rgb5 = interp(feature_rgb5)
-            loss_seg_rgb = seg_loss(pred_rgb5, label_rgb, args.gpu)
-
-            loss_sm = 0
-            domain_filter_loss = 0
+            total_df_loss = 0
 
             for idx, layer in enumerate(fsm_weights):
-                
-                layer_sm_loss = 0
-                domain_filter_loss = 0
+                # find domain filter loss for both layers
 
                 thermal_feature = thermal_features[layer]
                 rgb_feature = rgb_features[layer]
-
-                na,da,ha,wa = thermal_feature.size()
-                nb,db,hb,wb = rgb_feature.size()
 
                 if idx == 0:
                     domain_filter = DomainFilter1
@@ -308,24 +208,127 @@ def main():
                     domain_filter = DomainFilter2
                     domain_filter_optimizer = DomainFilter2_optimizer
 
-                domain_filter.eval()
+                domain_filter.train()  
+                domain_filter_optimizer.zero_grad()
 
-                # calculate style matching loss
+                thermal_gram = [0]*args.batch_size
+                rgb_gram = [0]*args.batch_size
+                vector_thermal_gram = [0]*args.batch_size
+                vector_rgb_gram = [0]*args.batch_size
+                thermal_factor = [0]*args.batch_size
+                rgb_factor = [0]*args.batch_size
 
                 for batch_idx in range(args.batch_size):
-                    thermal_gram = gram_matrix(thermal_feature[batch_idx])
-                    rgb_gram = gram_matrix(rgb_feature[batch_idx])
+                    # make gram matrix, upper diagnol as vector, factor vectors
+                    thermal_gram[batch_idx] = gram_matrix(thermal_feature[batch_idx])
+                    rgb_gram[batch_idx] = gram_matrix(rgb_feature[batch_idx])
 
-                    vector_thermal_gram = thermal_gram[torch.triu(torch.ones(thermal_gram.size()[0], thermal_gram.size()[1])).requires_grad_() == 1].requires_grad_()
-                    vector_rgb_gram = rgb_gram[torch.triu(torch.ones(rgb_gram.size()[0], rgb_gram.size()[1])).requires_grad_() == 1].requires_grad_()
+                    vector_thermal_gram[batch_idx] = Variable(thermal_gram[batch_idx][torch.triu(torch.ones(thermal_gram[batch_idx].size()[0], thermal_gram[batch_idx].size()[1])) == 1], requires_grad=True)
+                    vector_rgb_gram[batch_idx] = Variable(rgb_gram[batch_idx][torch.triu(torch.ones(rgb_gram[batch_idx].size()[0], rgb_gram[batch_idx].size()[1])) == 1], requires_grad=True)
 
-                    thermal_factor = domain_filter(vector_thermal_gram)
-                    rgb_factor = domain_filter(vector_rgb_gram)
+                    thermal_factor[batch_idx] = domain_filter(vector_thermal_gram[batch_idx])
+                    rgb_factor[batch_idx] = domain_filter(vector_rgb_gram[batch_idx])
+                
+                domain_factor_embeddings = torch.cat((torch.unsqueeze(thermal_factor[0],0),torch.unsqueeze(rgb_factor[0],0),
+                                                    torch.unsqueeze(thermal_factor[1],0),torch.unsqueeze(rgb_factor[1],0),
+                                                    #torch.unsqueeze(thermal_factor[2],0),torch.unsqueeze(rgb_factor[2],0),
+                                                    #torch.unsqueeze(thermal_factor[3],0),torch.unsqueeze(rgb_factor[3],0)
+                                                    ),0)
 
-                    half = int(rgb_factor.shape[0]/2)
-                    layer_sm_loss += fsm_weights[layer]*torch.mean((rgb_factor/(hb*wb) - thermal_factor/(ha*wa))**2)/half/ rgb_feature.size(0)
+                domain_factor_embeddings_norm = torch.norm(domain_factor_embeddings, p=2, dim=1).detach()
+                size_domain_factor = domain_factor_embeddings.size()
+                # domain_factor_embeddings = domain_factor_embeddings.div(domain_factor_embeddings_norm.expand(size_domain_factor[1],8).t())
+                domain_factor_embeddings = domain_factor_embeddings.div(domain_factor_embeddings_norm.expand(size_domain_factor[1],4).t())
+                #domain_factor_labels = torch.LongTensor([0, 1, 0, 1, 0, 1, 0, 1])
+                domain_factor_labels = torch.LongTensor([0, 1, 0, 1])
+                domain_filter_loss_val = domainfilter_loss(domain_factor_embeddings,domain_factor_labels)
 
-                loss_sm += layer_sm_loss / 4.
+                total_df_loss +=  domain_filter_loss_val
+
+                wandb.log({f'layer{idx}/fpf loss': domain_filter_loss_val}, step=i_iter)
+                wandb.log({f'layer{idx}/total fpf loss': total_df_loss}, step=i_iter)
+
+            # update total domain filter loss for the batch
+            total_df_loss.backward(retain_graph=False)
+
+            if args.modeltrain=='train':
+                # train segmentation network
+                # freeze the parameters of fog pass filtering modules
+
+                model.train()
+                for param in model.parameters():
+                    param.requires_grad = True
+                for param in DomainFilter1.parameters():
+                    param.requires_grad = False
+                for param in DomainFilter2.parameters():
+                    param.requires_grad = False
+
+                # get a batch of thermal and rgb images
+                _, batch  = thermal_loader_seg_iter.__next__()
+                thermal_image, label_thermal, size = batch
+                _, batch  = rgb_loader_seg_iter.__next__()
+                rgb_image, label_rgb, size = batch
+                interp = nn.Upsample(size=(size[0][0],size[0][1]), mode='bilinear')
+
+                # get features
+
+                thermal_image = Variable(thermal_image)#.cuda(args.gpu)
+                feature_t0, feature_t1, feature_t2, feature_t3, feature_t4, feature_t5 = model(thermal_image)
+
+                rgb_image = Variable(rgb_image)#.cuda(args.gpu)
+                feature_rgb0, feature_rgb1, feature_rgb2, feature_rgb3, feature_rgb4, feature_rgb5 = model(rgb_image)
+
+                fsm_weights = {'layer0':0.5, 'layer1':0.5}
+                rgb_features = {'layer0': feature_rgb0, 'layer1': feature_rgb1}
+                thermal_features = {'layer0': feature_t0, 'layer1': feature_t1}
+
+                # thermal segmentation loss
+                pred_t5 = interp(feature_t5)
+                loss_seg_thermal = seg_loss(pred_t5, label_thermal, args.gpu)
+
+                # rgb segmentation loss
+                pred_rgb5 = interp(feature_rgb5)
+                loss_seg_rgb = seg_loss(pred_rgb5, label_rgb, args.gpu)
+
+                loss_sm = 0
+                domain_filter_loss = 0
+
+                for idx, layer in enumerate(fsm_weights):
+                    
+                    layer_sm_loss = 0
+                    domain_filter_loss = 0
+
+                    thermal_feature = thermal_features[layer]
+                    rgb_feature = rgb_features[layer]
+
+                    na,da,ha,wa = thermal_feature.size()
+                    nb,db,hb,wb = rgb_feature.size()
+
+                    if idx == 0:
+                        domain_filter = DomainFilter1
+                        domain_filter_optimizer = DomainFilter1_optimizer
+                    elif idx == 1:
+                        domain_filter = DomainFilter2
+                        domain_filter_optimizer = DomainFilter2_optimizer
+
+                    domain_filter.eval()
+
+                    # calculate style matching loss
+
+                    for batch_idx in range(args.batch_size):
+                        thermal_gram = gram_matrix(thermal_feature[batch_idx])
+                        rgb_gram = gram_matrix(rgb_feature[batch_idx])
+
+                        vector_thermal_gram = thermal_gram[torch.triu(torch.ones(thermal_gram.size()[0], thermal_gram.size()[1])).requires_grad_() == 1].requires_grad_()
+                        vector_rgb_gram = rgb_gram[torch.triu(torch.ones(rgb_gram.size()[0], rgb_gram.size()[1])).requires_grad_() == 1].requires_grad_()
+
+                        thermal_factor = domain_filter(vector_thermal_gram)
+                        rgb_factor = domain_filter(vector_rgb_gram)
+
+                        half = int(rgb_factor.shape[0]/2)
+                        layer_sm_loss += fsm_weights[layer]*torch.mean((rgb_factor/(hb*wb) - thermal_factor/(ha*wa))**2)/half/ rgb_feature.size(0)
+
+                    loss_sm += layer_sm_loss / 4.
 
                 loss = loss_sm + loss_seg_thermal + loss_seg_rgb
                 loss = loss / args.iter_size
@@ -337,7 +340,7 @@ def main():
                     loss_seg_rgb_val += loss_seg_rgb.data.cpu().numpy() / args.iter_size
                 if loss_sm != 0:
                     loss_sm_val += loss_sm.data.cpu().numpy() / args.iter_size
-            
+                    
                 wandb.log({"fsm loss": args.lambda_fsm*loss_sm_val}, step=i_iter)
                 wandb.log({'thermal_loss_seg': loss_seg_thermal_val}, step=i_iter)
                 wandb.log({'rgb_loss_seg': loss_seg_rgb_val}, step=i_iter)

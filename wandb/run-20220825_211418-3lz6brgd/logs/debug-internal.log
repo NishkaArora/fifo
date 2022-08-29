@@ -1,0 +1,156 @@
+2022-08-25 21:14:18,745 INFO    MainThread:58065 [internal.py:wandb_internal():92] W&B internal server running at pid: 58065, started at: 2022-08-25 21:14:18.745682
+2022-08-25 21:14:18,748 INFO    WriterThread:58065 [datastore.py:open_for_write():77] open: /home/river/nishka/fifo/wandb/run-20220825_211418-3lz6brgd/run-3lz6brgd.wandb
+2022-08-25 21:14:18,749 DEBUG   SenderThread:58065 [sender.py:send():235] send: header
+2022-08-25 21:14:18,749 DEBUG   SenderThread:58065 [sender.py:send():235] send: run
+2022-08-25 21:14:18,942 DEBUG   HandlerThread:58065 [handler.py:handle_request():141] handle_request: check_version
+2022-08-25 21:14:18,954 INFO    SenderThread:58065 [dir_watcher.py:__init__():169] watching files in: /home/river/nishka/fifo/wandb/run-20220825_211418-3lz6brgd/files
+2022-08-25 21:14:18,955 INFO    SenderThread:58065 [sender.py:_start_run_threads():812] run started: 3lz6brgd with start time 1661487258
+2022-08-25 21:14:18,955 DEBUG   SenderThread:58065 [sender.py:send():235] send: summary
+2022-08-25 21:14:18,955 INFO    SenderThread:58065 [sender.py:_save_file():947] saving file wandb-summary.json with policy end
+2022-08-25 21:14:18,955 DEBUG   SenderThread:58065 [sender.py:send_request():249] send_request: check_version
+2022-08-25 21:14:19,119 DEBUG   HandlerThread:58065 [handler.py:handle_request():141] handle_request: run_start
+2022-08-25 21:14:19,121 DEBUG   HandlerThread:58065 [meta.py:__init__():37] meta init
+2022-08-25 21:14:19,121 DEBUG   HandlerThread:58065 [meta.py:__init__():51] meta init done
+2022-08-25 21:14:19,121 DEBUG   HandlerThread:58065 [meta.py:probe():211] probe
+2022-08-25 21:14:19,123 DEBUG   HandlerThread:58065 [meta.py:_setup_git():201] setup git
+2022-08-25 21:14:19,133 DEBUG   HandlerThread:58065 [meta.py:_setup_git():208] setup git done
+2022-08-25 21:14:19,133 DEBUG   HandlerThread:58065 [meta.py:_save_pip():55] save pip
+2022-08-25 21:14:19,134 DEBUG   HandlerThread:58065 [meta.py:_save_pip():69] save pip done
+2022-08-25 21:14:19,134 DEBUG   HandlerThread:58065 [meta.py:_save_conda():76] save conda
+2022-08-25 21:14:19,956 INFO    Thread-7  :58065 [dir_watcher.py:_on_file_created():217] file/dir created: /home/river/nishka/fifo/wandb/run-20220825_211418-3lz6brgd/files/conda-environment.yaml
+2022-08-25 21:14:19,956 INFO    Thread-7  :58065 [dir_watcher.py:_on_file_created():217] file/dir created: /home/river/nishka/fifo/wandb/run-20220825_211418-3lz6brgd/files/requirements.txt
+2022-08-25 21:14:19,957 INFO    Thread-7  :58065 [dir_watcher.py:_on_file_created():217] file/dir created: /home/river/nishka/fifo/wandb/run-20220825_211418-3lz6brgd/files/wandb-summary.json
+2022-08-25 21:14:21,390 DEBUG   HandlerThread:58065 [meta.py:_save_conda():86] save conda done
+2022-08-25 21:14:21,390 DEBUG   HandlerThread:58065 [meta.py:probe():249] probe done
+2022-08-25 21:14:21,427 DEBUG   SenderThread:58065 [sender.py:send():235] send: files
+2022-08-25 21:14:21,427 INFO    SenderThread:58065 [sender.py:_save_file():947] saving file wandb-metadata.json with policy now
+2022-08-25 21:14:21,433 DEBUG   HandlerThread:58065 [handler.py:handle_request():141] handle_request: stop_status
+2022-08-25 21:14:21,433 DEBUG   SenderThread:58065 [sender.py:send_request():249] send_request: stop_status
+2022-08-25 21:14:21,609 DEBUG   SenderThread:58065 [sender.py:send():235] send: telemetry
+2022-08-25 21:14:21,609 DEBUG   SenderThread:58065 [sender.py:send():235] send: config
+2022-08-25 21:14:21,955 INFO    Thread-7  :58065 [dir_watcher.py:_on_file_modified():230] file/dir modified: /home/river/nishka/fifo/wandb/run-20220825_211418-3lz6brgd/files/conda-environment.yaml
+2022-08-25 21:14:21,956 INFO    Thread-7  :58065 [dir_watcher.py:_on_file_created():217] file/dir created: /home/river/nishka/fifo/wandb/run-20220825_211418-3lz6brgd/files/output.log
+2022-08-25 21:14:21,956 INFO    Thread-7  :58065 [dir_watcher.py:_on_file_created():217] file/dir created: /home/river/nishka/fifo/wandb/run-20220825_211418-3lz6brgd/files/wandb-metadata.json
+2022-08-25 21:14:22,143 INFO    Thread-11 :58065 [upload_job.py:push():137] Uploaded file /tmp/tmpthoml8qqwandb/2lkva3y1-wandb-metadata.json
+2022-08-25 21:14:23,958 INFO    Thread-7  :58065 [dir_watcher.py:_on_file_modified():230] file/dir modified: /home/river/nishka/fifo/wandb/run-20220825_211418-3lz6brgd/files/output.log
+2022-08-25 21:14:25,737 DEBUG   SenderThread:58065 [sender.py:send():235] send: telemetry
+2022-08-25 21:14:27,951 DEBUG   SenderThread:58065 [sender.py:send():235] send: exit
+2022-08-25 21:14:27,952 DEBUG   HandlerThread:58065 [handler.py:handle_request():141] handle_request: poll_exit
+2022-08-25 21:14:27,952 INFO    SenderThread:58065 [sender.py:send_exit():371] handling exit code: 1
+2022-08-25 21:14:27,952 INFO    SenderThread:58065 [sender.py:send_exit():373] handling runtime: 8
+2022-08-25 21:14:27,953 INFO    SenderThread:58065 [sender.py:_save_file():947] saving file wandb-summary.json with policy end
+2022-08-25 21:14:27,953 INFO    SenderThread:58065 [sender.py:send_exit():379] send defer
+2022-08-25 21:14:27,953 DEBUG   SenderThread:58065 [sender.py:send_request():249] send_request: poll_exit
+2022-08-25 21:14:27,954 DEBUG   HandlerThread:58065 [handler.py:handle_request():141] handle_request: defer
+2022-08-25 21:14:27,954 INFO    HandlerThread:58065 [handler.py:handle_request_defer():164] handle defer: 0
+2022-08-25 21:14:27,954 DEBUG   SenderThread:58065 [sender.py:send_request():249] send_request: defer
+2022-08-25 21:14:27,955 INFO    SenderThread:58065 [sender.py:send_request_defer():388] handle sender defer: 0
+2022-08-25 21:14:27,955 INFO    SenderThread:58065 [sender.py:transition_state():392] send defer: 1
+2022-08-25 21:14:27,955 DEBUG   HandlerThread:58065 [handler.py:handle_request():141] handle_request: defer
+2022-08-25 21:14:27,955 INFO    HandlerThread:58065 [handler.py:handle_request_defer():164] handle defer: 1
+2022-08-25 21:14:27,960 INFO    Thread-7  :58065 [dir_watcher.py:_on_file_modified():230] file/dir modified: /home/river/nishka/fifo/wandb/run-20220825_211418-3lz6brgd/files/output.log
+2022-08-25 21:14:27,960 INFO    Thread-7  :58065 [dir_watcher.py:_on_file_modified():230] file/dir modified: /home/river/nishka/fifo/wandb/run-20220825_211418-3lz6brgd/files/wandb-summary.json
+2022-08-25 21:14:28,053 DEBUG   SenderThread:58065 [sender.py:send_request():249] send_request: defer
+2022-08-25 21:14:28,054 INFO    SenderThread:58065 [sender.py:send_request_defer():388] handle sender defer: 1
+2022-08-25 21:14:28,054 INFO    SenderThread:58065 [sender.py:transition_state():392] send defer: 2
+2022-08-25 21:14:28,054 DEBUG   SenderThread:58065 [sender.py:send():235] send: stats
+2022-08-25 21:14:28,055 DEBUG   HandlerThread:58065 [handler.py:handle_request():141] handle_request: defer
+2022-08-25 21:14:28,055 INFO    HandlerThread:58065 [handler.py:handle_request_defer():164] handle defer: 2
+2022-08-25 21:14:28,055 DEBUG   SenderThread:58065 [sender.py:send_request():249] send_request: defer
+2022-08-25 21:14:28,055 DEBUG   HandlerThread:58065 [handler.py:handle_request():141] handle_request: poll_exit
+2022-08-25 21:14:28,055 INFO    SenderThread:58065 [sender.py:send_request_defer():388] handle sender defer: 2
+2022-08-25 21:14:28,056 INFO    SenderThread:58065 [sender.py:transition_state():392] send defer: 3
+2022-08-25 21:14:28,056 DEBUG   SenderThread:58065 [sender.py:send_request():249] send_request: poll_exit
+2022-08-25 21:14:28,056 DEBUG   HandlerThread:58065 [handler.py:handle_request():141] handle_request: defer
+2022-08-25 21:14:28,057 INFO    HandlerThread:58065 [handler.py:handle_request_defer():164] handle defer: 3
+2022-08-25 21:14:28,057 DEBUG   SenderThread:58065 [sender.py:send_request():249] send_request: defer
+2022-08-25 21:14:28,057 INFO    SenderThread:58065 [sender.py:send_request_defer():388] handle sender defer: 3
+2022-08-25 21:14:28,057 INFO    SenderThread:58065 [sender.py:transition_state():392] send defer: 4
+2022-08-25 21:14:28,058 DEBUG   HandlerThread:58065 [handler.py:handle_request():141] handle_request: defer
+2022-08-25 21:14:28,058 INFO    HandlerThread:58065 [handler.py:handle_request_defer():164] handle defer: 4
+2022-08-25 21:14:28,058 DEBUG   SenderThread:58065 [sender.py:send():235] send: summary
+2022-08-25 21:14:28,059 INFO    SenderThread:58065 [sender.py:_save_file():947] saving file wandb-summary.json with policy end
+2022-08-25 21:14:28,059 DEBUG   SenderThread:58065 [sender.py:send_request():249] send_request: defer
+2022-08-25 21:14:28,059 INFO    SenderThread:58065 [sender.py:send_request_defer():388] handle sender defer: 4
+2022-08-25 21:14:28,059 INFO    SenderThread:58065 [sender.py:transition_state():392] send defer: 5
+2022-08-25 21:14:28,060 DEBUG   HandlerThread:58065 [handler.py:handle_request():141] handle_request: defer
+2022-08-25 21:14:28,060 INFO    HandlerThread:58065 [handler.py:handle_request_defer():164] handle defer: 5
+2022-08-25 21:14:28,060 DEBUG   SenderThread:58065 [sender.py:send_request():249] send_request: defer
+2022-08-25 21:14:28,060 INFO    SenderThread:58065 [sender.py:send_request_defer():388] handle sender defer: 5
+2022-08-25 21:14:28,158 DEBUG   HandlerThread:58065 [handler.py:handle_request():141] handle_request: poll_exit
+2022-08-25 21:14:28,376 INFO    SenderThread:58065 [sender.py:transition_state():392] send defer: 6
+2022-08-25 21:14:28,376 DEBUG   SenderThread:58065 [sender.py:send_request():249] send_request: poll_exit
+2022-08-25 21:14:28,376 DEBUG   HandlerThread:58065 [handler.py:handle_request():141] handle_request: defer
+2022-08-25 21:14:28,376 INFO    HandlerThread:58065 [handler.py:handle_request_defer():164] handle defer: 6
+2022-08-25 21:14:28,377 DEBUG   SenderThread:58065 [sender.py:send_request():249] send_request: defer
+2022-08-25 21:14:28,377 INFO    SenderThread:58065 [sender.py:send_request_defer():388] handle sender defer: 6
+2022-08-25 21:14:28,377 INFO    SenderThread:58065 [dir_watcher.py:finish():283] shutting down directory watcher
+2022-08-25 21:14:28,477 DEBUG   HandlerThread:58065 [handler.py:handle_request():141] handle_request: poll_exit
+2022-08-25 21:14:28,960 INFO    Thread-7  :58065 [dir_watcher.py:_on_file_modified():230] file/dir modified: /home/river/nishka/fifo/wandb/run-20220825_211418-3lz6brgd/files/config.yaml
+2022-08-25 21:14:28,961 INFO    SenderThread:58065 [dir_watcher.py:_on_file_modified():230] file/dir modified: /home/river/nishka/fifo/wandb/run-20220825_211418-3lz6brgd/files/wandb-summary.json
+2022-08-25 21:14:28,962 INFO    SenderThread:58065 [dir_watcher.py:finish():313] scan: /home/river/nishka/fifo/wandb/run-20220825_211418-3lz6brgd/files
+2022-08-25 21:14:28,962 INFO    SenderThread:58065 [dir_watcher.py:finish():327] scan save: /home/river/nishka/fifo/wandb/run-20220825_211418-3lz6brgd/files/config.yaml config.yaml
+2022-08-25 21:14:28,962 INFO    SenderThread:58065 [dir_watcher.py:finish():327] scan save: /home/river/nishka/fifo/wandb/run-20220825_211418-3lz6brgd/files/output.log output.log
+2022-08-25 21:14:28,962 INFO    SenderThread:58065 [dir_watcher.py:finish():327] scan save: /home/river/nishka/fifo/wandb/run-20220825_211418-3lz6brgd/files/wandb-summary.json wandb-summary.json
+2022-08-25 21:14:28,963 INFO    SenderThread:58065 [dir_watcher.py:finish():327] scan save: /home/river/nishka/fifo/wandb/run-20220825_211418-3lz6brgd/files/conda-environment.yaml conda-environment.yaml
+2022-08-25 21:14:28,963 INFO    SenderThread:58065 [dir_watcher.py:finish():327] scan save: /home/river/nishka/fifo/wandb/run-20220825_211418-3lz6brgd/files/wandb-metadata.json wandb-metadata.json
+2022-08-25 21:14:28,968 INFO    SenderThread:58065 [dir_watcher.py:finish():327] scan save: /home/river/nishka/fifo/wandb/run-20220825_211418-3lz6brgd/files/requirements.txt requirements.txt
+2022-08-25 21:14:28,968 INFO    SenderThread:58065 [sender.py:transition_state():392] send defer: 7
+2022-08-25 21:14:28,969 DEBUG   SenderThread:58065 [sender.py:send_request():249] send_request: poll_exit
+2022-08-25 21:14:28,970 DEBUG   HandlerThread:58065 [handler.py:handle_request():141] handle_request: defer
+2022-08-25 21:14:28,970 INFO    HandlerThread:58065 [handler.py:handle_request_defer():164] handle defer: 7
+2022-08-25 21:14:28,975 DEBUG   SenderThread:58065 [sender.py:send_request():249] send_request: defer
+2022-08-25 21:14:28,976 INFO    SenderThread:58065 [sender.py:send_request_defer():388] handle sender defer: 7
+2022-08-25 21:14:28,976 INFO    SenderThread:58065 [file_pusher.py:finish():145] shutting down file pusher
+2022-08-25 21:14:29,071 DEBUG   HandlerThread:58065 [handler.py:handle_request():141] handle_request: poll_exit
+2022-08-25 21:14:29,071 DEBUG   SenderThread:58065 [sender.py:send_request():249] send_request: poll_exit
+2022-08-25 21:14:29,186 DEBUG   HandlerThread:58065 [handler.py:handle_request():141] handle_request: poll_exit
+2022-08-25 21:14:29,193 DEBUG   SenderThread:58065 [sender.py:send_request():249] send_request: poll_exit
+2022-08-25 21:14:29,297 DEBUG   HandlerThread:58065 [handler.py:handle_request():141] handle_request: poll_exit
+2022-08-25 21:14:29,298 DEBUG   SenderThread:58065 [sender.py:send_request():249] send_request: poll_exit
+2022-08-25 21:14:29,401 DEBUG   HandlerThread:58065 [handler.py:handle_request():141] handle_request: poll_exit
+2022-08-25 21:14:29,402 DEBUG   SenderThread:58065 [sender.py:send_request():249] send_request: poll_exit
+2022-08-25 21:14:29,503 DEBUG   HandlerThread:58065 [handler.py:handle_request():141] handle_request: poll_exit
+2022-08-25 21:14:29,504 DEBUG   SenderThread:58065 [sender.py:send_request():249] send_request: poll_exit
+2022-08-25 21:14:29,571 INFO    Thread-13 :58065 [upload_job.py:push():137] Uploaded file /home/river/nishka/fifo/wandb/run-20220825_211418-3lz6brgd/files/output.log
+2022-08-25 21:14:29,576 INFO    Thread-12 :58065 [upload_job.py:push():137] Uploaded file /home/river/nishka/fifo/wandb/run-20220825_211418-3lz6brgd/files/config.yaml
+2022-08-25 21:14:29,580 INFO    Thread-15 :58065 [upload_job.py:push():137] Uploaded file /home/river/nishka/fifo/wandb/run-20220825_211418-3lz6brgd/files/conda-environment.yaml
+2022-08-25 21:14:29,583 INFO    Thread-14 :58065 [upload_job.py:push():137] Uploaded file /home/river/nishka/fifo/wandb/run-20220825_211418-3lz6brgd/files/wandb-summary.json
+2022-08-25 21:14:29,606 DEBUG   HandlerThread:58065 [handler.py:handle_request():141] handle_request: poll_exit
+2022-08-25 21:14:29,607 DEBUG   SenderThread:58065 [sender.py:send_request():249] send_request: poll_exit
+2022-08-25 21:14:29,674 INFO    Thread-16 :58065 [upload_job.py:push():137] Uploaded file /home/river/nishka/fifo/wandb/run-20220825_211418-3lz6brgd/files/requirements.txt
+2022-08-25 21:14:29,709 DEBUG   HandlerThread:58065 [handler.py:handle_request():141] handle_request: poll_exit
+2022-08-25 21:14:29,709 DEBUG   SenderThread:58065 [sender.py:send_request():249] send_request: poll_exit
+2022-08-25 21:14:29,811 DEBUG   HandlerThread:58065 [handler.py:handle_request():141] handle_request: poll_exit
+2022-08-25 21:14:29,812 DEBUG   SenderThread:58065 [sender.py:send_request():249] send_request: poll_exit
+2022-08-25 21:14:29,875 INFO    Thread-6 (_thread_body):58065 [sender.py:transition_state():392] send defer: 8
+2022-08-25 21:14:29,876 DEBUG   HandlerThread:58065 [handler.py:handle_request():141] handle_request: defer
+2022-08-25 21:14:29,876 INFO    HandlerThread:58065 [handler.py:handle_request_defer():164] handle defer: 8
+2022-08-25 21:14:29,876 DEBUG   SenderThread:58065 [sender.py:send_request():249] send_request: defer
+2022-08-25 21:14:29,876 INFO    SenderThread:58065 [sender.py:send_request_defer():388] handle sender defer: 8
+2022-08-25 21:14:29,914 DEBUG   HandlerThread:58065 [handler.py:handle_request():141] handle_request: poll_exit
+2022-08-25 21:14:29,967 INFO    SenderThread:58065 [sender.py:transition_state():392] send defer: 9
+2022-08-25 21:14:29,968 DEBUG   SenderThread:58065 [sender.py:send_request():249] send_request: poll_exit
+2022-08-25 21:14:29,968 DEBUG   HandlerThread:58065 [handler.py:handle_request():141] handle_request: defer
+2022-08-25 21:14:29,969 INFO    HandlerThread:58065 [handler.py:handle_request_defer():164] handle defer: 9
+2022-08-25 21:14:29,969 DEBUG   SenderThread:58065 [sender.py:send_request():249] send_request: defer
+2022-08-25 21:14:29,969 INFO    SenderThread:58065 [sender.py:send_request_defer():388] handle sender defer: 9
+2022-08-25 21:14:29,969 INFO    SenderThread:58065 [sender.py:transition_state():392] send defer: 10
+2022-08-25 21:14:29,970 DEBUG   HandlerThread:58065 [handler.py:handle_request():141] handle_request: defer
+2022-08-25 21:14:29,970 DEBUG   SenderThread:58065 [sender.py:send():235] send: final
+2022-08-25 21:14:29,970 INFO    HandlerThread:58065 [handler.py:handle_request_defer():164] handle defer: 10
+2022-08-25 21:14:29,971 DEBUG   SenderThread:58065 [sender.py:send():235] send: footer
+2022-08-25 21:14:29,971 DEBUG   SenderThread:58065 [sender.py:send_request():249] send_request: defer
+2022-08-25 21:14:29,971 INFO    SenderThread:58065 [sender.py:send_request_defer():388] handle sender defer: 10
+2022-08-25 21:14:30,070 DEBUG   HandlerThread:58065 [handler.py:handle_request():141] handle_request: poll_exit
+2022-08-25 21:14:30,070 DEBUG   SenderThread:58065 [sender.py:send_request():249] send_request: poll_exit
+2022-08-25 21:14:30,070 INFO    SenderThread:58065 [file_pusher.py:join():150] waiting for file pusher
+2022-08-25 21:14:30,515 DEBUG   HandlerThread:58065 [handler.py:handle_request():141] handle_request: sampled_history
+2022-08-25 21:14:30,516 DEBUG   HandlerThread:58065 [handler.py:handle_request():141] handle_request: get_summary
+2022-08-25 21:14:30,517 DEBUG   HandlerThread:58065 [handler.py:handle_request():141] handle_request: shutdown
+2022-08-25 21:14:30,517 INFO    HandlerThread:58065 [handler.py:finish():790] shutting down handler
+2022-08-25 21:14:30,970 INFO    WriterThread:58065 [datastore.py:close():281] close: /home/river/nishka/fifo/wandb/run-20220825_211418-3lz6brgd/run-3lz6brgd.wandb
+2022-08-25 21:14:31,413 INFO    SenderThread:58065 [sender.py:finish():1107] shutting down sender
+2022-08-25 21:14:31,413 INFO    SenderThread:58065 [file_pusher.py:finish():145] shutting down file pusher
+2022-08-25 21:14:31,413 INFO    SenderThread:58065 [file_pusher.py:join():150] waiting for file pusher
+2022-08-25 21:14:31,415 INFO    MainThread:58065 [internal.py:handle_exit():82] Internal process exited

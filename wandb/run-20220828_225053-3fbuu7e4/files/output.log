@@ -1,0 +1,16 @@
+../../thermal_data/labelled_thermal_data/arroyo_seco/annotations/*
+../../thermal_data/labelled_thermal_data/flight2-1/annotations/*
+../../thermal_data/labelled_thermal_data/ONR_2022-05-15-06-26-49/annotations/*
+../../thermal_data/labelled_thermal_data/ONR_2022-05-15-06-00-08/annotations/*
+../../thermal_data/labelled_thermal_data/bigbear/annotations/*
+# samples: 104
+# samples: 1099
+../../thermal_data/labelled_thermal_data/arroyo_seco/annotations/*
+../../thermal_data/labelled_thermal_data/flight2-1/annotations/*
+../../thermal_data/labelled_thermal_data/ONR_2022-05-15-06-26-49/annotations/*
+../../thermal_data/labelled_thermal_data/ONR_2022-05-15-06-00-08/annotations/*
+../../thermal_data/labelled_thermal_data/bigbear/annotations/*
+# samples: 104
+# samples: 1099
+  0%|                                                                                                                      | 0/100000 [00:00<?, ?it/s]/home/river/miniconda3/envs/pl/lib/python3.10/site-packages/torch/nn/_reduction.py:42: UserWarning: size_average and reduce args will be deprecated, please use reduction='mean' instead.
+  warnings.warn(warning.format(ret))

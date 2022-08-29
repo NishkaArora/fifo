@@ -1,0 +1,17 @@
+# samples: 104
+# samples: 1099
+# samples: 104
+# samples: 1099
+  0%|                                                                                                                      | 0/100000 [00:03<?, ?it/s]
+Traceback (most recent call last):
+  File "/home/river/nishka/fifo/new_main.py", line 393, in <module>
+    main()
+  File "/home/river/nishka/fifo/new_main.py", line 244, in main
+    domain_filter_loss_val = domainfilter_loss(domain_factor_embeddings,domain_factor_labels)
+  File "/home/river/miniconda3/envs/pl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1110, in _call_impl
+    return forward_call(*input, **kwargs)
+  File "/home/river/nishka/fifo/pytorch_metric_learning/losses/base_metric_loss_function.py", line 32, in forward
+    c_f.check_shapes(embeddings, labels)
+  File "/home/river/nishka/fifo/pytorch_metric_learning/utils/common_functions.py", line 416, in check_shapes
+    raise ValueError("Number of embeddings must equal number of labels")
+ValueError: Number of embeddings must equal number of labels

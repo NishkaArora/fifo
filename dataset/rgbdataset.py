@@ -34,6 +34,7 @@ class RGBDataset(data.Dataset): # init, len, getitem, _apply_transform
 
     def load_data(self):
         self.data = glob.glob(os.path.join(self.data_root, 'cocostuff_water', 'images', self.set, '*'))
+        self.data = self.data[0: len(self.data)//10] # 10 percent of original data
         self.num_sample = len(self.data)
         assert self.num_sample > 0
         print('# samples: {}'.format(self.num_sample))
@@ -98,5 +99,5 @@ if __name__ == '__main__':
     plt.show()
 
     plt.figure()
-    plt.imshow(label_tensor[0].numpy().squeeze())
+    plt.imshow(label_tensor.numpy().squeeze())
     plt.show()

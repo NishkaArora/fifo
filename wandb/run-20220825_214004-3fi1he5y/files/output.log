@@ -1,0 +1,67 @@
+# samples: 104
+# samples: 1099
+# samples: 104
+# samples: 1099
+  0%|                                                                                                                      | 0/100000 [00:00<?, ?it/s]/home/river/miniconda3/envs/pl/lib/python3.10/site-packages/torch/nn/_reduction.py:42: UserWarning: size_average and reduce args will be deprecated, please use reduction='mean' instead.
+  warnings.warn(warning.format(ret))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  0%|                                                                                                         | 52/100000 [10:19<330:51:02, 11.92s/it]
+Traceback (most recent call last):
+  File "/home/river/nishka/fifo/new_main.py", line 393, in <module>
+    main()
+  File "/home/river/nishka/fifo/new_main.py", line 179, in main
+    _, batch  = thermal_loader_df_iter.__next__()
+  File "/home/river/miniconda3/envs/pl/lib/python3.10/site-packages/torch/utils/data/dataloader.py", line 530, in __next__
+    data = self._next_data()
+  File "/home/river/miniconda3/envs/pl/lib/python3.10/site-packages/torch/utils/data/dataloader.py", line 1197, in _next_data
+    raise StopIteration
+StopIteration

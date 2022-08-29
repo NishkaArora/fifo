@@ -1,0 +1,47 @@
+2022-08-28 22:50:54,045 INFO    MainThread:40503 [internal.py:wandb_internal():92] W&B internal server running at pid: 40503, started at: 2022-08-28 22:50:54.045345
+2022-08-28 22:50:54,047 INFO    WriterThread:40503 [datastore.py:open_for_write():77] open: /home/river/nishka/fifo/wandb/run-20220828_225053-3fbuu7e4/run-3fbuu7e4.wandb
+2022-08-28 22:50:54,049 DEBUG   SenderThread:40503 [sender.py:send():235] send: header
+2022-08-28 22:50:54,049 DEBUG   SenderThread:40503 [sender.py:send():235] send: run
+2022-08-28 22:50:54,319 DEBUG   HandlerThread:40503 [handler.py:handle_request():141] handle_request: check_version
+2022-08-28 22:50:54,324 INFO    SenderThread:40503 [dir_watcher.py:__init__():169] watching files in: /home/river/nishka/fifo/wandb/run-20220828_225053-3fbuu7e4/files
+2022-08-28 22:50:54,324 INFO    SenderThread:40503 [sender.py:_start_run_threads():812] run started: 3fbuu7e4 with start time 1661752253
+2022-08-28 22:50:54,324 DEBUG   SenderThread:40503 [sender.py:send():235] send: summary
+2022-08-28 22:50:54,325 INFO    SenderThread:40503 [sender.py:_save_file():947] saving file wandb-summary.json with policy end
+2022-08-28 22:50:54,325 DEBUG   SenderThread:40503 [sender.py:send_request():249] send_request: check_version
+2022-08-28 22:50:54,565 DEBUG   HandlerThread:40503 [handler.py:handle_request():141] handle_request: run_start
+2022-08-28 22:50:54,567 DEBUG   HandlerThread:40503 [meta.py:__init__():37] meta init
+2022-08-28 22:50:54,567 DEBUG   HandlerThread:40503 [meta.py:__init__():51] meta init done
+2022-08-28 22:50:54,567 DEBUG   HandlerThread:40503 [meta.py:probe():211] probe
+2022-08-28 22:50:54,569 DEBUG   HandlerThread:40503 [meta.py:_setup_git():201] setup git
+2022-08-28 22:50:54,579 DEBUG   HandlerThread:40503 [meta.py:_setup_git():208] setup git done
+2022-08-28 22:50:54,580 DEBUG   HandlerThread:40503 [meta.py:_save_pip():55] save pip
+2022-08-28 22:50:54,581 DEBUG   HandlerThread:40503 [meta.py:_save_pip():69] save pip done
+2022-08-28 22:50:54,581 DEBUG   HandlerThread:40503 [meta.py:_save_conda():76] save conda
+2022-08-28 22:50:55,325 INFO    Thread-7  :40503 [dir_watcher.py:_on_file_created():217] file/dir created: /home/river/nishka/fifo/wandb/run-20220828_225053-3fbuu7e4/files/requirements.txt
+2022-08-28 22:50:55,326 INFO    Thread-7  :40503 [dir_watcher.py:_on_file_created():217] file/dir created: /home/river/nishka/fifo/wandb/run-20220828_225053-3fbuu7e4/files/wandb-summary.json
+2022-08-28 22:50:55,326 INFO    Thread-7  :40503 [dir_watcher.py:_on_file_created():217] file/dir created: /home/river/nishka/fifo/wandb/run-20220828_225053-3fbuu7e4/files/conda-environment.yaml
+2022-08-28 22:50:56,919 DEBUG   HandlerThread:40503 [meta.py:_save_conda():86] save conda done
+2022-08-28 22:50:56,919 DEBUG   HandlerThread:40503 [meta.py:probe():249] probe done
+2022-08-28 22:50:56,955 DEBUG   SenderThread:40503 [sender.py:send():235] send: files
+2022-08-28 22:50:56,955 INFO    SenderThread:40503 [sender.py:_save_file():947] saving file wandb-metadata.json with policy now
+2022-08-28 22:50:56,961 DEBUG   HandlerThread:40503 [handler.py:handle_request():141] handle_request: stop_status
+2022-08-28 22:50:56,961 DEBUG   SenderThread:40503 [sender.py:send_request():249] send_request: stop_status
+2022-08-28 22:50:57,212 DEBUG   SenderThread:40503 [sender.py:send():235] send: telemetry
+2022-08-28 22:50:57,213 DEBUG   SenderThread:40503 [sender.py:send():235] send: config
+2022-08-28 22:50:57,325 INFO    Thread-7  :40503 [dir_watcher.py:_on_file_modified():230] file/dir modified: /home/river/nishka/fifo/wandb/run-20220828_225053-3fbuu7e4/files/conda-environment.yaml
+2022-08-28 22:50:57,325 INFO    Thread-7  :40503 [dir_watcher.py:_on_file_created():217] file/dir created: /home/river/nishka/fifo/wandb/run-20220828_225053-3fbuu7e4/files/output.log
+2022-08-28 22:50:57,326 INFO    Thread-7  :40503 [dir_watcher.py:_on_file_created():217] file/dir created: /home/river/nishka/fifo/wandb/run-20220828_225053-3fbuu7e4/files/wandb-metadata.json
+2022-08-28 22:50:57,603 INFO    Thread-11 :40503 [upload_job.py:push():137] Uploaded file /tmp/tmprvs7oozuwandb/1ljad0iu-wandb-metadata.json
+2022-08-28 22:50:59,326 INFO    Thread-7  :40503 [dir_watcher.py:_on_file_modified():230] file/dir modified: /home/river/nishka/fifo/wandb/run-20220828_225053-3fbuu7e4/files/output.log
+2022-08-28 22:51:01,607 DEBUG   HandlerThread:40503 [handler.py:handle_request():141] handle_request: partial_history
+2022-08-28 22:51:01,608 DEBUG   HandlerThread:40503 [handler.py:handle_request():141] handle_request: partial_history
+2022-08-28 22:51:01,724 DEBUG   HandlerThread:40503 [handler.py:handle_request():141] handle_request: partial_history
+2022-08-28 22:51:01,725 DEBUG   HandlerThread:40503 [handler.py:handle_request():141] handle_request: partial_history
+2022-08-28 22:51:07,330 INFO    Thread-7  :40503 [dir_watcher.py:_on_file_modified():230] file/dir modified: /home/river/nishka/fifo/wandb/run-20220828_225053-3fbuu7e4/files/output.log
+2022-08-28 22:51:10,838 DEBUG   HandlerThread:40503 [handler.py:handle_request():141] handle_request: partial_history
+2022-08-28 22:51:10,838 DEBUG   HandlerThread:40503 [handler.py:handle_request():141] handle_request: partial_history
+2022-08-28 22:51:10,838 DEBUG   HandlerThread:40503 [handler.py:handle_request():141] handle_request: partial_history
+2022-08-28 22:51:10,838 DEBUG   HandlerThread:40503 [handler.py:handle_request():141] handle_request: partial_history
+2022-08-28 22:51:12,214 DEBUG   HandlerThread:40503 [handler.py:handle_request():141] handle_request: stop_status
+2022-08-28 22:51:12,214 DEBUG   SenderThread:40503 [sender.py:send_request():249] send_request: stop_status
+2022-08-28 22:51:13,334 INFO    Thread-7  :40503 [dir_watcher.py:_on_file_modified():230] file/dir modified: /home/river/nishka/fifo/wandb/run-20220828_225053-3fbuu7e4/files/output.log

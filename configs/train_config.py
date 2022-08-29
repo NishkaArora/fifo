@@ -3,7 +3,7 @@ import numpy as np
 
 IMG_MEAN = np.array((104.00698793, 116.66876762, 122.67891434), dtype=np.float32)
 BETA = 0.005
-BATCH_SIZE = 4
+BATCH_SIZE = 2
 ITER_SIZE = 1
 NUM_WORKERS = 4
 DATA_DIRECTORY ='/root/data1'
@@ -22,7 +22,8 @@ RANDOM_SEED = 1234
 RESTORE_FROM = 'no_model'
 RESTORE_FROM_fogpass = 'no_model'
 SAVE_PRED_EVERY = 100
-SNAPSHOT_DIR = f'/home/river/nishka/fifo/snapshots'   
+# SNAPSHOT_DIR = f'/home/river/nishka/fifo/snapshots'
+SNAPSHOT_DIR = f'/home/fremont/users/nishka_arora/fifo/snapshots'  
 
 SET = 'train'
 

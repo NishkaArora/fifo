@@ -1,0 +1,27 @@
+{
+    "os": "Linux-5.15.0-46-generic-x86_64-with-glibc2.31",
+    "python": "3.10.4",
+    "heartbeatAt": "2022-08-29T05:49:52.144002",
+    "startedAt": "2022-08-29T05:49:51.010918",
+    "docker": null,
+    "cpu_count": 16,
+    "cuda": null,
+    "args": [
+        "--file-name",
+        "xyz",
+        "--modeltrain",
+        "train"
+    ],
+    "state": "running",
+    "program": "/home/river/nishka/fifo/new_main.py",
+    "codePath": "new_main.py",
+    "git": {
+        "remote": "https://github.com/NishkaArora/fifo.git",
+        "commit": "1e1e0e6199eb4363909b05eca0a356b973ca3067"
+    },
+    "email": "naarora@caltech.edu",
+    "root": "/home/river/nishka/fifo",
+    "host": "river-drone-2",
+    "username": "river",
+    "executable": "/home/river/miniconda3/envs/pl/bin/python3"
+}

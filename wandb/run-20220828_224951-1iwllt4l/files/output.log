@@ -1,0 +1,15 @@
+../labelled_thermal_data/arroyo_seco/annotations/*
+../labelled_thermal_data/flight2-1/annotations/*
+../labelled_thermal_data/ONR_2022-05-15-06-26-49/annotations/*
+../labelled_thermal_data/ONR_2022-05-15-06-00-08/annotations/*
+../labelled_thermal_data/bigbear/annotations/*
+Traceback (most recent call last):
+  File "/home/river/nishka/fifo/new_main.py", line 393, in <module>
+    main()
+  File "/home/river/nishka/fifo/new_main.py", line 145, in main
+    thermal_loader_seg = data.DataLoader(ThermalDataset(data_root, 'training'), batch_size=args.batch_size, shuffle=True, num_workers=1, pin_memory=True)
+  File "/home/river/nishka/fifo/dataset/thermaldataset.py", line 23, in __init__
+    self.load_data() # set could be training or validation
+  File "/home/river/nishka/fifo/dataset/thermaldataset.py", line 59, in load_data
+    assert self.num_sample > 0
+AssertionError

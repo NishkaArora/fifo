@@ -1,0 +1,11 @@
+# samples: 104
+# samples: 1099
+# samples: 104
+# samples: 1099
+  0%|                                                                                                                      | 0/100000 [00:03<?, ?it/s]
+Traceback (most recent call last):
+  File "/home/river/nishka/fifo/new_main.py", line 391, in <module>
+    main()
+  File "/home/river/nishka/fifo/new_main.py", line 240, in main
+    domain_factor_embeddings = domain_factor_embeddings.div(domain_factor_embeddings_norm.expand(size_domain_factor[1],8).t())
+RuntimeError: The expanded size of the tensor (8) must match the existing size (4) at non-singleton dimension 1.  Target sizes: [64, 8].  Tensor sizes: [4]
